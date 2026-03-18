@@ -21,11 +21,11 @@ This hands-on workshop teaches you how to effectively use AI assistants (like Gi
 ## Resources
 
 - **Workshop Materials**: [GitHub Pages](https://cstewart-hc.github.io/programming_w_agents/)
-- **Full Workshop Guide**: [pages/workshop.html](pages/workshop.html)
+- **Full Workshop Guide**: [docs/workshop.html](docs/workshop.html)
 - **Handouts**:
-  - [Handout 1: Applied Analytics Engineering Principles](pages/handouts/principles.html)
-  - [Handout 2: Copilot UI & Cheat Sheet](pages/handouts/copilot-cheatsheet.html)
-  - [Handout 3: Fallback Configurations](pages/handouts/fallback-configs.html)
+  - [Handout 1: Applied Analytics Engineering Principles](docs/handouts/principles.html)
+  - [Handout 2: Copilot UI & Cheat Sheet](docs/handouts/copilot-cheatsheet.html)
+  - [Handout 3: Fallback Configurations](docs/handouts/fallback-configs.html)
 - **Sample Data**: `data/retail_sample.csv` (December 2010 transactions)
 - **Full Dataset**: `data/online_retail.xlsx`
 - **Source Code**: `src/`
@@ -59,7 +59,7 @@ pre-commit install
 │   ├── retail_sample.csv        # Workshop sample (Dec 2010)
 │   └── online_retail.xlsx       # Full UCI dataset
 ├── notebooks/                   # Jupyter notebooks
-├── pages/                       # GitHub Pages content
+├── docs/                        # GitHub Pages content
 │   ├── index.html
 │   ├── workshop.html
 │   └── handouts/
