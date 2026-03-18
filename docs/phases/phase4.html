@@ -230,18 +230,22 @@
             </div>
             
             <div class="step-section">
-                <h3><span class="step-num">5</span> Refactor</h3>
-                <p>Return to <strong>Copilot Edits</strong> and prompt:</p>
+                <h3><span class="step-num">5</span> Fix</h3>
+                <p>Return to <strong>Copilot Edits</strong> and paste the Ruff error output directly — don't ask for a "refactor." Let the agent figure out the fix based on the error:</p>
                 
                 <div class="prompt-box">
                     <div class="prompt-label">
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    <span class="prompt-text">"The code failed my pre-commit hook due to high cognitive complexity. Refactor <code>process_retail_data</code> into the smaller, modular helper functions we originally planned so it passes the Ruff linter."</span>
+                    <span class="prompt-text">"[Paste the full Ruff error output from pre-commit here.]"</span>
+                </div>
+
+                <div class="note">
+                    <strong>Why not ask for a refactor?</strong> Telling the agent what to do (e.g., "refactor into helper functions") can produce a lazy fix that just barely passes. Pasting the raw error lets the agent reason about the best solution given the constraints already defined in your <code>copilot-instructions.md</code>.
                 </div>
                 
-                <p>Accept the refactored code. Run <code>pre-commit run --all-files</code> again to verify it passes:</p>
+                <p>Accept the fixed code. Run <code>pre-commit run --all-files</code> again to verify it passes:</p>
                 <pre><code>pre-commit run --all-files</code></pre>
                 
                 <div class="success">
