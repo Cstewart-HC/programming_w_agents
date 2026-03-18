@@ -67,6 +67,7 @@
             margin-bottom: 1.5rem;
         }
         .copy-all-bar span { font-size: 0.9rem; color: #2b6cb0; }
+        .copy-all-bar .actions { display: flex; gap: 0.5rem; align-items: center; }
         .copy-all-btn {
             background: #2b6cb0;
             color: white;
@@ -80,6 +81,35 @@
         }
         .copy-all-btn:hover { background: #2c5282; }
         .copy-all-btn.copied { background: #38a169; }
+        .toggle-btn {
+            background: transparent;
+            color: #2b6cb0;
+            border: 1px solid #2b6cb0;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+        .toggle-btn:hover { background: #ebf8ff; }
+        .toggle-btn.active { background: #2b6cb0; color: white; }
+        .raw-view {
+            display: none;
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .raw-view.visible { display: block; }
     </style>
 </head>
 <body>
@@ -93,8 +123,42 @@
         
         <div class="copy-all-bar">
             <span>Paste this into <code>.github/copilot-instructions.md</code></span>
-            <button class="copy-all-btn" onclick="copyPrinciples(this)">Copy All</button>
+            <div class="actions">
+                <button class="toggle-btn" onclick="toggleRaw(this)">View Raw</button>
+                <button class="copy-all-btn" onclick="copyPrinciples(this)">Copy Markdown</button>
+            </div>
         </div>
+
+        <pre class="raw-view" id="raw-markdown"># Applied Analytics Engineering Principles
+# This file guides GitHub Copilot's code generation for this workspace.
+
+## 1. Modularity &amp; Single Responsibility
+- **AI Constraint:** Always break down complex requests into smaller, composable helper functions. Do not generate single, monolithic functions.
+- Each function should do one thing well.
+- Functions should be testable in isolation.
+- Avoid "god functions" that handle multiple concerns.
+
+## 2. Low Cognitive Complexity
+- **AI Constraint:** Prioritize flat, linear logic. Return early to avoid nesting. Maximum cognitive complexity per function is 15.
+  *(Note: Adjusted to 5 for today's demo to force failures during exercises.)*
+- Use guard clauses: check conditions and return early.
+- Avoid deeply nested if/else chains.
+- Extract complex conditionals into well-named helper functions.
+
+## 3. Human-Readable Constraints
+- **AI Constraint:** Maximum function length is 50 lines. Maximum line width is 88 characters.
+- Use descriptive variable names that reflect domain concepts.
+- If a function needs 50+ lines, it's probably doing too much.
+- 88 characters fits comfortably side-by-side on most screens.
+
+## 4. Explicit Over Implicit
+- **AI Constraint:** Python 3.10+ type hinting is strictly mandatory. Variables must use descriptive, domain-specific naming. Functions must include Google-style docstrings.
+
+## 5. Defensive Data Handling
+- **AI Constraint:** Implement explicit schema validation steps when reading external data files. Do not swallow exceptions.
+- Validate assumptions about data types and ranges early.
+- Let exceptions propagate with clear messages.
+- Never trust external data to match expected format.</pre>
 
         <div id="principles-content">
         <div class="principle">
@@ -197,16 +261,22 @@ def load_retail_data(filepath: Path) -> pd.DataFrame:
     </div>
     <script>
         function copyPrinciples(btn) {
-            var el = document.getElementById('principles-content');
-            var text = el.innerText;
+            var text = document.getElementById('raw-markdown').innerText;
             navigator.clipboard.writeText(text).then(function() {
                 btn.textContent = 'Copied!';
                 btn.classList.add('copied');
                 setTimeout(function() {
-                    btn.textContent = 'Copy All';
+                    btn.textContent = 'Copy Markdown';
                     btn.classList.remove('copied');
                 }, 2000);
             });
+        }
+        function toggleRaw(btn) {
+            var raw = document.getElementById('raw-markdown');
+            var rendered = document.getElementById('principles-content');
+            raw.classList.toggle('visible');
+            btn.classList.toggle('active');
+            btn.textContent = raw.classList.contains('visible') ? 'View Formatted' : 'View Raw';
         }
     </script>
 </body>
