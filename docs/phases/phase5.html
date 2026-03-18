@@ -65,8 +65,8 @@
         .nav-buttons a { display: inline-flex; align-items: center; padding: 0.75rem var(--space-md); border-radius: 6px; text-decoration: none; font-weight: 500; }
         .nav-buttons .prev { background: #edf2f7; color: #4a5568; }
         .nav-buttons .prev:hover { background: #e2e8f0; }
-        .nav-buttons .next { background: var(--color-success); color: white; }
-        .nav-buttons .next:hover { background: #2f855a; }
+        .nav-buttons .next { background: var(--color-primary); color: white; }
+        .nav-buttons .next:hover { background: var(--color-primary-dark); }
         .step-section { margin: var(--space-lg) 0; padding: var(--space-md); background: #f7fafc; border-radius: 8px; border-left: 4px solid var(--color-primary); }
         .step-section h3 { margin-top: 0; color: var(--color-primary); display: flex; align-items: center; gap: var(--space-xs); }
         .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--color-primary); color: white; border-radius: 50%; font-size: 0.875rem; }
@@ -134,6 +134,10 @@
             <div class="step active" aria-current="step">
                 <div class="circle" aria-label="Phase 5: Current">5</div>
                 <span class="label">Iterate</span>
+            </div>
+            <div class="step">
+                <div class="circle">6</div>
+                <span class="label">What's Next</span>
             </div>
         </nav>
 
@@ -225,41 +229,11 @@ France               £12,518.73       834
             <div class="success" style="margin-top: var(--space-lg);">
                 <strong>Workshop Complete.</strong> You went from an empty folder to a working, linted, committed analysis script — all driven through AI-assisted prompts with automated quality gates. The code isn't just correct; it's structured well enough that a teammate (or you, six months from now) can read and modify it.
             </div>
-
-            <h2>What's Missing?</h2>
-            <p>The Plan-Build-Review loop you learned today is a powerful starting point, but a real data pipeline needs more to be trustworthy:</p>
-            <ul>
-                <li><strong>Unit tests</strong> — How do you know your revenue calculation is correct for edge cases (zero quantities, missing prices, negative returns)?</li>
-                <li><strong>Data validation</strong> — What if the CSV schema changes or a column goes missing? A validation pass would catch that before any analysis runs.</li>
-                <li><strong>Reproducibility</strong> — Are your results the same every run? Without pinned dependencies and deterministic data handling, they might not be.</li>
-                <li><strong>CI/CD</strong> — Right now the hooks run on your machine. In a team setting, they should run automatically on every pull request.</li>
-            </ul>
-
-            <h2>Next Workshop</h2>
-            <p>A follow-up session will extend this project with automated testing and data validation, using the same Plan-Build-Review loop with Copilot. You'll learn how to prompt for testable code from the start and use hooks to enforce test coverage, not just style.</p>
-
-            <h2>Take-Home Challenge</h2>
-            <p>Extend this project by adding a Jupyter notebook that acts as a <strong>dashboard</strong> for the analysis results. The notebook should:</p>
-            <ul>
-                <li>Read the report from <code>reports/analysis_report.txt</code> (or the CSV directly)</li>
-                <li>Display the revenue-by-country data as a <strong>bar chart</strong></li>
-                <li>Display anomaly counts as a <strong>pie chart or summary table</strong></li>
-                <li>Include markdown cells explaining each section</li>
-            </ul>
-            <p>Save it as <code>notebooks/dashboard.ipynb</code> and use the same Plan-Build-Review loop to build it.</p>
-            
-            <div class="prompt-box">
-                <div class="prompt-label">
-                    <strong>Copy this prompt:</strong>
-                    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-                </div>
-                <span class="prompt-text">"Create a Jupyter notebook at <code>notebooks/dashboard.ipynb</code> that reads <code>data/retail_sample.csv</code>, displays a revenue-by-country bar chart and an anomaly summary, with markdown cells explaining each section."</span>
-            </div>
         </main>
 
         <div class="nav-buttons">
             <a href="phase4.html" class="prev">&larr; Phase 4: Development Loop</a>
-            <a href="../index.html" class="next">Workshop Complete! &check;</a>
+            <a href="phase6.html" class="next">Phase 6: What's Next &rarr;</a>
         </div>
         
         <footer style="margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.8rem; text-align: center;">
