@@ -127,7 +127,11 @@
             </div>
             <div class="step active" aria-current="step">
                 <div class="circle" aria-label="Phase 4: Current">4</div>
-                <span class="label">Development</span>
+                <span class="label">Dev Loop</span>
+            </div>
+            <div class="step">
+                <div class="circle">5</div>
+                <span class="label">Iterate</span>
             </div>
         </nav>
 
@@ -136,7 +140,7 @@
             
             <span class="phase-badge">Phase 4</span>
             <span class="time-badge">45 min</span>
-            <h1>Feature Development</h1>
+            <h1>Development Loop</h1>
             
             <div class="objective">
                 <strong>Objective:</strong> Execute the core development loop using the UCI Online Retail dataset. You'll intentionally write complex code, watch it get blocked, then refactor.
@@ -260,38 +264,12 @@
                 </div>
             </div>
             
-            <div class="step-section">
-                <h3><span class="step-num">6</span> Run It</h3>
-                <p>Everything passes linting — but does it actually work? Let's find out.</p>
-                
-                <div class="prompt-box">
-                    <div class="prompt-label">
-                        <strong>Copy this prompt:</strong>
-                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-                    </div>
-                    <span class="prompt-text">"Run <code>src/analysis.py</code> and show me the output."</span>
-                </div>
-                
-                <p>You should see two console tables: a revenue summary grouped by country and a list of flagged anomalies (returns, missing customer IDs). If something looks off, paste the error back to Agent Mode and iterate.</p>
-                
-                <div class="success">
-                    <strong>This is the payoff.</strong> You just went from an empty folder to a working, linted, committed analysis script — all driven through AI-assisted prompts with automated quality gates. The code isn't just correct; it's structured well enough that a teammate (or you, six months from now) can read and modify it.
-                </div>
-            </div>
-            
-            <h2>Key Takeaways</h2>
-            <ul>
-                <li><strong>Plan first, build second</strong> - The Plan-Build-Review loop prevents wasted effort</li>
-                <li><strong>AI is a soft check, hooks are hard gates</strong> - Trust the automated enforcement</li>
-                <li><strong>Complexity limits force better design</strong> - Breaking code into small functions isn't just about passing linting; it's about maintainability</li>
-                <li><strong>Iterate with the AI</strong> - Feed error messages back to the agent to get targeted fixes</li>
-            </ul>
         </main>
 
-        <div class="nav-buttons">
-            <a href="phase3.html" class="prev">&larr; Phase 3: Enforcement</a>
-            <a href="../index.html" class="next">Workshop Complete! &check;</a>
-        </div>
+            <div class="nav-buttons">
+                <a href="phase3.html" class="prev">&larr; Phase 3: Enforcement</a>
+                <a href="phase5.html" class="next">Phase 5: Iterate &rarr;</a>
+            </div>
         
         <footer style="margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.8rem; text-align: center;">
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>

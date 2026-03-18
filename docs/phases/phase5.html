@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Phase 2: Deterministic Setup - Set up your Python environment and lock dependencies using AI-assisted terminal commands.">
-    <title>Phase 2: Deterministic Setup - Programming with AI Workshop</title>
+    <meta name="description" content="Phase 5: Iterate - Run your analysis script, inspect the output, and iterate on any issues.">
+    <title>Phase 5: Iterate - Programming with AI Workshop</title>
     <style>
         :root {
             --space-xs: 0.5rem;
@@ -65,10 +65,11 @@
         .nav-buttons a { display: inline-flex; align-items: center; padding: 0.75rem var(--space-md); border-radius: 6px; text-decoration: none; font-weight: 500; }
         .nav-buttons .prev { background: #edf2f7; color: #4a5568; }
         .nav-buttons .prev:hover { background: #e2e8f0; }
-        .nav-buttons .next { background: var(--color-primary); color: white; }
-        .nav-buttons .next:hover { background: var(--color-primary-dark); }
+        .nav-buttons .next { background: var(--color-success); color: white; }
+        .nav-buttons .next:hover { background: #2f855a; }
         .step-section { margin: var(--space-lg) 0; padding: var(--space-md); background: #f7fafc; border-radius: 8px; border-left: 4px solid var(--color-primary); }
-        .step-section h3 { margin-top: 0; color: var(--color-primary); }
+        .step-section h3 { margin-top: 0; color: var(--color-primary); display: flex; align-items: center; gap: var(--space-xs); }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--color-primary); color: white; border-radius: 50%; font-size: 0.875rem; }
         .prompt-box { background: #f0fff4; border: 1px solid #9ae6b4; padding: var(--space-sm); border-radius: 6px; margin: var(--space-sm) 0; font-size: 0.95rem; position: relative; }
         .prompt-box .prompt-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs); }
         .prompt-box .prompt-label strong { color: #276749; }
@@ -85,14 +86,16 @@
         .copy-btn:hover { background: #22543d; }
         .copy-btn.copied { background: var(--color-success); }
         .note { background: #fffaf0; border-left: 4px solid var(--color-warning); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
-        .commit-checkpoint { background: #e6fffa; border-left: 4px solid #38b2ac; padding: var(--space-sm); margin: var(--space-md) 0; border-radius: 0 4px 4px 0; }
-        .commit-checkpoint strong { color: #234e52; }
-        .commit-checkpoint pre { margin-top: var(--space-xs); margin-bottom: 0; }
+        .success { background: #f0fff4; border-left: 4px solid var(--color-success); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
+        .warning { background: #fff5f5; border-left: 4px solid var(--color-danger); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
+        .output-preview { background: #1a202c; color: #e2e8f0; padding: var(--space-md); border-radius: 6px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; overflow-x: auto; white-space: pre; margin: var(--space-sm) 0; }
         .breadcrumb { margin-bottom: var(--space-sm); }
         .breadcrumb a { color: var(--color-text-light); text-decoration: none; font-size: 0.9rem; }
         .breadcrumb a:hover { color: var(--color-primary); }
-        ol, ul { padding-left: var(--space-md); }
+        ul { padding-left: var(--space-md); }
         li { margin-bottom: 0.5rem; }
+        .takeaway-list { background: #f7fafc; padding: var(--space-md); border-radius: 8px; border: 1px solid var(--color-border); }
+        .takeaway-list li { margin-bottom: var(--space-sm); }
         @media (max-width: 600px) {
             body { padding: var(--space-sm); }
             .container { padding: var(--space-sm); }
@@ -116,20 +119,20 @@
                 <a href="phase1.html" aria-label="Go to Phase 1: AI Workflow"><div class="circle">&#10003;</div></a>
                 <span class="label">AI Workflow</span>
             </div>
-            <div class="step active" aria-current="step">
-                <div class="circle" aria-label="Phase 2: Current">2</div>
+            <div class="step completed">
+                <a href="phase2.html" aria-label="Go to Phase 2: Setup"><div class="circle">&#10003;</div></a>
                 <span class="label">Setup</span>
             </div>
-            <div class="step">
-                <div class="circle">3</div>
+            <div class="step completed">
+                <a href="phase3.html" aria-label="Go to Phase 3: Enforcement"><div class="circle">&#10003;</div></a>
                 <span class="label">Enforcement</span>
             </div>
-            <div class="step">
-                <div class="circle">4</div>
+            <div class="step completed">
+                <a href="phase4.html" aria-label="Go to Phase 4: Dev Loop"><div class="circle">&#10003;</div></a>
                 <span class="label">Dev Loop</span>
             </div>
-            <div class="step">
-                <div class="circle">5</div>
+            <div class="step active" aria-current="step">
+                <div class="circle" aria-label="Phase 5: Current">5</div>
                 <span class="label">Iterate</span>
             </div>
         </nav>
@@ -137,94 +140,96 @@
         <main id="main-content">
             <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
             
-            <span class="phase-badge">Phase 2</span>
-            <span class="time-badge">20 min</span>
-            <h1>Deterministic Setup</h1>
+            <span class="phase-badge">Phase 5</span>
+            <span class="time-badge">10 min</span>
+            <h1>Iterate</h1>
             
             <div class="objective">
-                <strong>Objective:</strong> Set up the environment and lock dependencies securely using Agent Mode.
+                <strong>Objective:</strong> Run the analysis script, verify the output, and iterate on any issues — this is the manual part of the Review phase in the Plan-Build-Review loop.
             </div>
             
             <div class="step-section">
-                <h3>Step 1: The Master Scaffolding Prompt</h3>
-                <p>Open the <strong>Copilot Chat Sidebar</strong> (<code>Ctrl+Alt+I</code>) and select <strong>Agent Mode</strong> from the agent selector at the top of the panel. Agent Mode can execute terminal commands and create files simultaneously.</p>
-                
-                <div class="note" style="margin-bottom: var(--space-md);">
-                    <strong>Before you start:</strong> Make sure you are <strong>not</strong> in your home directory or an existing project folder. Check with <code>pwd</code> and navigate to an appropriate location first. Agent Mode will create a dedicated <code>retail_analysis</code> folder for you.
-                </div>
+                <h3><span class="step-num">1</span> Run the Script</h3>
+                <p>Your code passes linting — but does it actually work? Open <strong>Agent Mode</strong> (<code>Ctrl+Shift+I</code>) and prompt:</p>
                 
                 <div class="prompt-box">
                     <div class="prompt-label">
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    <span class="prompt-text">"Act as a senior Python data engineer. Execute these steps sequentially:
-                    <ol>
-                        <li>Create a new directory called <code>retail_analysis</code>, navigate into it, and initialize a git repository.</li>
-                        <li>Use <code>pip</code> to install the latest versions of <code>pandas</code>, <code>seaborn</code>, <code>jupyter</code>, <code>ruff</code>, and <code>pre-commit</code>.</li>
-                        <li>Run <code>pip freeze > requirements.txt</code> to lock the exact versions.</li>
-                        <li>Scaffold the project directory structure, creating separate folders for <code>data</code>, <code>notebooks</code>, and <code>src</code>.</li>
-                        <li>Generate a standard Python <code>.gitignore</code> file that includes <code>.venv/</code>, <code>__pycache__/</code>, and <code>.env</code>.</li>
-                        <li>Create an empty <code>.github/copilot-instructions.md</code> file.</li>
-                        <li>Create <code>pyproject.toml</code> and <code>.pre-commit-config.yaml</code> files configured to use Ruff. <strong>For this demonstration, enforce a strict cognitive complexity limit of 5 (C901) and a maximum line length of 88.</strong> Finally, run <code>pre-commit install</code>.</li>
-                    </ol>
-                    Review the suggested steps and click <strong>Run</strong>."</span>
+                    <span class="prompt-text">"Run <code>src/analysis.py</code> and show me the output."</span>
                 </div>
                 
-                <div class="commit-checkpoint">
-                    <strong>Checkpoint:</strong> Once scaffolding is complete, ask Agent Mode to make your initial commit:
-                    <div class="prompt-box">
-                        <div class="prompt-label">
-                            <strong>Copy this prompt:</strong>
-                            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-                        </div>
-                        <span class="prompt-text">"Stage and commit all files with the message 'Initial project scaffolding'."</span>
-                    </div>
-                    This gives you a clean baseline to return to if anything goes wrong later.
-                </div>
-                
-                <div class="note">
-                    <strong>Fallback:</strong> If Agent Mode fails due to permissions, run these commands manually:
-                    <pre><code>python -m venv .venv
-.venv\Scripts\activate  # Windows
-source .venv/bin/activate  # macOS/Linux
-pip install pandas seaborn jupyter ruff pre-commit
-pip freeze > requirements.txt
-pre-commit install</code></pre>
-                </div>
+                <p>You should see two console tables: a <strong>revenue summary</strong> grouped by country and an <strong>anomaly list</strong> flagging returns and missing customer IDs.</p>
             </div>
             
             <div class="step-section">
-                <h3>Step 2: Define Workspace Instructions</h3>
-                <p>Open the <code>.github/copilot-instructions.md</code> file. Paste the <strong>Applied Analytics Engineering Principles</strong> into this file and save it.</p>
+                <h3><span class="step-num">2</span> Expected Output</h3>
+                <p>If everything works correctly, your output should look something like this:</p>
                 
-                <div class="note">
-                    <strong>Why this matters:</strong> This file acts as both human reference and the AI's executable constraints. Copilot reads this file to understand your coding standards.
+                <div class="output-preview">=== Revenue by Country ===
+Country              Total Revenue    Transactions
+United Kingdom       £421,832.15      36,892
+Netherlands          £17,540.32       437
+EIRE                 £15,823.21       748
+Germany              £14,327.46       949
+France               £12,518.73       834
+
+=== Anomalies Detected ===
+[!] 1,062 returns (negative quantities) found
+[!] 1,348 records with missing CustomerID
+[!] 3,410 total anomalies (8.0% of dataset)</div>
+                
+                <p>The exact numbers will vary depending on how the agent implemented date parsing and filtering, but you should see a ranked country list and a summary of flagged records.</p>
+            </div>
+            
+            <div class="step-section">
+                <h3><span class="step-num">3</span> Handle Errors</h3>
+                <p>If the script crashes or produces unexpected output, paste the error directly back to Agent Mode:</p>
+                
+                <div class="prompt-box">
+                    <div class="prompt-label">
+                        <strong>Copy this prompt:</strong>
+                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    </div>
+                    <span class="prompt-text">"[Paste the full error output here.]"</span>
                 </div>
                 
-                <p>Refer to <a href="../handouts/principles.html">Handout 1: Applied Analytics Engineering Principles</a> for the full content.</p>
+                <div class="note">
+                    <strong>Don't describe the error in your own words.</strong> Paste the raw traceback. The agent can reason about the exact line numbers and types, which leads to faster, more accurate fixes.
+                </div>
                 
-                <div class="commit-checkpoint">
-                    <strong>Checkpoint:</strong> After pasting the principles, ask Agent Mode to commit:
+                <p>After the agent applies a fix, run the script again to confirm. Repeat this cycle until the output looks correct.</p>
+                
+                <div class="commit-checkpoint" style="background: #e6fffa; border-left: 4px solid #38b2ac; padding: var(--space-sm); margin: var(--space-md) 0; border-radius: 0 4px 4px 0;">
+                    <strong style="color: #234e52;">Checkpoint:</strong> Once the script runs cleanly, use Agent Mode to commit:
                     <div class="prompt-box">
                         <div class="prompt-label">
                             <strong>Copy this prompt:</strong>
                             <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                         </div>
-                        <span class="prompt-text">"Stage and commit the <code>.github/copilot-instructions.md</code> file with the message 'Add copilot instructions'."</span>
+                        <span class="prompt-text">"Stage and commit all changes with the message 'Verify analysis output and fix runtime issues'."</span>
                     </div>
-                    This ensures the AI's guidelines are tracked from the start.
                 </div>
             </div>
             
-            <div class="warning" style="background: #fff5f5; border-left: 4px solid #e53e3e; padding: var(--space-sm); margin: var(--space-md) 0; border-radius: 0 4px 4px 0;">
-                <strong>Important: Start a new chat session.</strong> Copilot only reads <code>.github/copilot-instructions.md</code> at the start of a new conversation. Close your current chat and open a fresh one before moving to Phase 3 so the AI picks up your workspace rules.
+            <h2>Key Takeaways</h2>
+            <ul class="takeaway-list">
+                <li><strong>Plan first, build second</strong> — The Plan-Build-Review loop prevents wasted effort. Phase 1's plan directly informed Phase 4's build.</li>
+                <li><strong>AI is a soft check, hooks are hard gates</strong> — Copilot can suggest improvements, but only automated enforcement catches every issue consistently.</li>
+                <li><strong>Paste errors, don't describe them</strong> — Raw tracebacks give the agent the context it needs. Paraphrasing loses critical details.</li>
+                <li><strong>Complexity limits force better design</strong> — Small functions aren't just about passing linting; they're easier to debug, test, and maintain.</li>
+                <li><strong>The Review phase is where quality happens</strong> — Running the script, inspecting output, and iterating on errors is the manual counterpart to the automated hooks. Both are essential.</li>
+            </ul>
+            
+            <div class="success" style="margin-top: var(--space-lg);">
+                <strong>Workshop Complete.</strong> You went from an empty folder to a working, linted, committed analysis script — all driven through AI-assisted prompts with automated quality gates. The code isn't just correct; it's structured well enough that a teammate (or you, six months from now) can read and modify it.
             </div>
         </main>
 
         <div class="nav-buttons">
-            <a href="phase1.html" class="prev">&larr; Phase 1: AI Workflow</a>
-            <a href="phase3.html" class="next">Phase 3: Enforcement &rarr;</a>
+            <a href="phase4.html" class="prev">&larr; Phase 4: Development Loop</a>
+            <a href="../index.html" class="next">Workshop Complete! &check;</a>
         </div>
         
         <footer style="margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.8rem; text-align: center;">
