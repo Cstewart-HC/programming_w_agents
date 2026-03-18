@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handout 1: Applied Analytics Engineering Principles</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; margin-top: 0; }
+        h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
+        a { color: #2b6cb0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        pre { background: #1a202c; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        pre code { background: none; padding: 0; color: inherit; }
+        .principle { 
+            background: #f0fff4; 
+            border-left: 4px solid #38b2ac; 
+            padding: 1rem 1.5rem; 
+            margin: 1.5rem 0; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .principle h3 { color: #234e52; margin-top: 0; }
+        .constraint { 
+            background: #ebf8ff; 
+            padding: 0.75rem 1rem; 
+            border-radius: 4px; 
+            margin: 0.5rem 0; 
+            font-size: 0.95em;
+        }
+        .constraint::before { content: "AI Constraint: "; font-weight: bold; color: #2b6cb0; }
+        .nav { margin-bottom: 2rem; }
+        .nav a { color: #718096; }
+        ul, ol { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+        .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="nav"><a href="../index.html">&larr; Back to Overview</a></p>
+        
+        <h1>Handout 1: Applied Analytics Engineering Principles</h1>
+        <p><em>Note: Keep a copy of this text inside <code>.github/copilot-instructions.md</code> for the AI to read.</em></p>
+        
+        <div class="principle">
+            <h3>1. Modularity & Single Responsibility</h3>
+            <div class="constraint">Always break down complex requests into smaller, composable helper functions. Do not generate single, monolithic functions.</div>
+            <ul>
+                <li>Each function should do one thing well</li>
+                <li>Functions should be testable in isolation</li>
+                <li>Avoid "god functions" that handle multiple concerns</li>
+            </ul>
+        </div>
+        
+        <div class="principle">
+            <h3>2. Low Cognitive Complexity</h3>
+            <div class="constraint">Prioritize flat, linear logic. Return early to avoid nesting. Maximum cognitive complexity per function is 15.</div>
+            <div class="note">
+                <strong>Workshop Note:</strong> Adjusted to 5 for today's demo to force failures during exercises.
+            </div>
+            <ul>
+                <li>Use guard clauses: check conditions and return early</li>
+                <li>Avoid deeply nested if/else chains</li>
+                <li>Extract complex conditionals into well-named helper functions</li>
+            </ul>
+        </div>
+        
+        <div class="principle">
+            <h3>3. Human-Readable Constraints</h3>
+            <div class="constraint">Maximum function length is 50 lines. Maximum line width is 88 characters.</div>
+            <ul>
+                <li>Use descriptive variable names that reflect domain concepts</li>
+                <li>If a function needs 50+ lines, it's probably doing too much</li>
+                <li>88 characters fits comfortably side-by-side on most screens</li>
+            </ul>
+        </div>
+        
+        <div class="principle">
+            <h3>4. Explicit Over Implicit</h3>
+            <div class="constraint">Python 3.10+ type hinting is strictly mandatory. Variables must use descriptive, domain-specific naming. Functions must include Google-style docstrings.</div>
+            
+            <p>Example:</p>
+            <pre><code>def calculate_revenue(quantity: int, unit_price: float) -> float:
+    """Calculate total revenue for a line item.
+    
+    Args:
+        quantity: Number of units sold.
+        unit_price: Price per unit in currency.
+        
+    Returns:
+        Total revenue as quantity * unit_price.
+    """
+    return quantity * unit_price</code></pre>
+        </div>
+        
+        <div class="principle">
+            <h3>5. Defensive Data Handling</h3>
+            <div class="constraint">Implement explicit schema validation steps when reading external data files. Do not swallow exceptions.</div>
+            <ul>
+                <li>Validate assumptions about data types and ranges early</li>
+                <li>Let exceptions propagate with clear messages</li>
+                <li>Never trust external data to match expected format</li>
+            </ul>
+            
+            <p>Example:</p>
+            <pre><code>from pathlib import Path
+import pandas as pd
+
+def load_retail_data(filepath: Path) -> pd.DataFrame:
+    """Load and validate retail transaction data.
+    
+    Args:
+        filepath: Path to the CSV file.
+        
+    Raises:
+        FileNotFoundError: If the file does not exist.
+        ValueError: If required columns are missing.
+        
+    Returns:
+        Validated DataFrame with parsed dates.
+    """
+    if not filepath.exists():
+        raise FileNotFoundError(f"Data file not found: {filepath}")
+    
+    df = pd.read_csv(filepath, parse_dates=["InvoiceDate"])
+    
+    required_cols = {"InvoiceNo", "Quantity", "UnitPrice", "Country"}
+    missing = required_cols - set(df.columns)
+    if missing:
+        raise ValueError(f"Missing required columns: {missing}")
+    
+    return df</code></pre>
+        </div>
+        
+        <p class="nav" style="margin-top: 2rem;"><a href="../index.html">&larr; Back to Overview</a></p>
+    </div>
+</body>
+</html>

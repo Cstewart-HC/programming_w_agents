@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handout 2: Copilot UI & Cheat Sheet</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; margin-top: 0; }
+        h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
+        h3 { color: #4a5568; }
+        a { color: #2b6cb0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        kbd { 
+            background: #1a202c; 
+            color: #e2e8f0; 
+            padding: 0.2rem 0.5rem; 
+            border-radius: 4px; 
+            font-size: 0.85em;
+            font-family: monospace;
+        }
+        .ui-element {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+        .ui-element h3 { margin-top: 0; color: #2b6cb0; }
+        .ui-element .best-for { color: #718096; font-style: italic; margin-top: 0.5rem; }
+        .shortcut { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0.75rem 1rem;
+            background: #f7fafc;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+        .shortcut kbd { font-size: 0.8rem; }
+        .command-box {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.75rem 0;
+        }
+        .command-box code { background: none; color: #68d391; }
+        .command-box .desc { color: #a0aec0; font-size: 0.9em; }
+        .nav { margin-bottom: 2rem; }
+        .nav a { color: #718096; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="nav"><a href="../index.html">&larr; Back to Overview</a></p>
+        
+        <h1>Handout 2: Copilot UI & Cheat Sheet</h1>
+        
+        <h2>Essential UI Elements</h2>
+        
+        <div class="ui-element">
+            <h3>Terminal Chat / Inline Chat</h3>
+            <p>Best for targeted edits or running terminal commands without memorizing syntax.</p>
+            <div class="shortcut">
+                <span>Open Terminal Chat</span>
+                <kbd>Ctrl+I</kbd>
+            </div>
+            <p class="best-for">Use when: You need to run commands, create files, or make quick edits without context switching.</p>
+        </div>
+        
+        <div class="ui-element">
+            <h3>Copilot Edits (Agent Mode)</h3>
+            <p>Best for the <strong>Build</strong> phase when scaffolding or applying changes across multiple files simultaneously.</p>
+            <div class="shortcut">
+                <span>Open Copilot Edits</span>
+                <kbd>Ctrl+Shift+I</kbd>
+            </div>
+            <p class="best-for">Use when: Implementing features, refactoring code, or making coordinated changes across multiple files.</p>
+        </div>
+        
+        <div class="ui-element">
+            <h3>Copilot Chat Sidebar</h3>
+            <p>Best for the <strong>Plan</strong> and <strong>Review</strong> phases.</p>
+            <div class="shortcut">
+                <span>Open Chat Sidebar</span>
+                <kbd>Ctrl+Alt+I</kbd>
+            </div>
+            <p class="best-for">Use when: Designing your approach, asking questions about code, or reviewing implementations.</p>
+        </div>
+        
+        <h2>Context Variables & Commands</h2>
+        
+        <div class="command-box">
+            <code>@workspace</code>
+            <p class="desc">Reads your entire directory structure and files. Use when you need Copilot to understand the full project context.</p>
+        </div>
+        
+        <div class="command-box">
+            <code>#file:&lt;filename&gt;</code>
+            <p class="desc">Type <code>#</code> followed by a filename to force Copilot to read a specific file (e.g., <code>#file:retail_sample.csv</code>).</p>
+        </div>
+        
+        <div class="command-box">
+            <code>/review</code>
+            <p class="desc">Analyzes the active file for bugs or style issues.</p>
+            <p class="desc" style="color: #fc8181;"><strong>Reminder:</strong> This is a soft check. Your Git hooks are the final authority.</p>
+        </div>
+        
+        <div class="command-box">
+            <code>/explain</code>
+            <p class="desc">Explains the selected code or the entire active file in plain language.</p>
+        </div>
+        
+        <div class="command-box">
+            <code>/fix</code>
+            <p class="desc">Proposes fixes for problems in the selected code or active file.</p>
+        </div>
+        
+        <div class="command-box">
+            <code>/tests</code>
+            <p class="desc">Generates unit tests for the selected code.</p>
+        </div>
+        
+        <h2>Workflow Tips</h2>
+        
+        <h3>Effective Prompting</h3>
+        <ul>
+            <li><strong>Be specific:</strong> "Create a function that calculates X" beats "help me with math"</li>
+            <li><strong>Provide context:</strong> Use <code>@workspace</code> or <code>#file:</code> to point to relevant files</li>
+            <li><strong>Specify constraints:</strong> Mention complexity limits, line length, or style requirements</li>
+            <li><strong>Iterate:</strong> If output isn't right, refine your prompt rather than accepting subpar code</li>
+        </ul>
+        
+        <h3>The Hard Truth</h3>
+        <ul>
+            <li>AI suggestions are <em>suggestions</em> - always review before accepting</li>
+            <li>Your pre-commit hooks are the final gate - if they fail, the code doesn't ship</li>
+            <li>Copilot doesn't know your business logic unless you tell it</li>
+        </ul>
+        
+        <p class="nav" style="margin-top: 2rem;"><a href="../index.html">&larr; Back to Overview</a></p>
+    </div>
+</body>
+</html>

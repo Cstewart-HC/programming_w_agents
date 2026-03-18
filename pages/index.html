@@ -5,35 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Programming with AI Workshop</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
             line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
         }
-        h1 { color: #2d3748; }
-        h2 { color: #4a5568; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
-        code { background: #f7fafc; padding: 0.2rem 0.4rem; border-radius: 4px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
-        th { background: #f7fafc; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; margin-top: 0; }
+        h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
+        h3 { color: #4a5568; }
+        a { color: #2b6cb0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .phase-card {
+            background: #edf2f7;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #2b6cb0;
+        }
+        .phase-card h3 { margin: 0 0 0.5rem 0; font-size: 1rem; }
+        .phase-card .duration { color: #718096; font-size: 0.875rem; }
+        .handout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .handout-card {
+            background: #fffaf0;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #dd6b20;
+        }
+        .handout-card h3 { margin: 0 0 0.5rem 0; color: #c05621; font-size: 1rem; }
+        .cta { display: inline-block; background: #2b6cb0; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; margin-top: 1rem; }
+        .cta:hover { background: #2c5282; text-decoration: none; }
+        code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
     </style>
 </head>
 <body>
-    <h1>Programming with AI Workshop</h1>
-    <p>Materials and exercises for the Applied Research team.</p>
-    
-    <h2>Workshop Agenda</h2>
-    <table>
-        <tr><th>Phase</th><th>Duration</th><th>Topic</th></tr>
-        <tr><td>1</td><td>15 min</td><td>The AI Workflow</td></tr>
-        <tr><td>2</td><td>25 min</td><td>Zero-Hallucination Setup</td></tr>
-        <tr><td>3</td><td>20 min</td><td>The Hard Enforcement</td></tr>
-        <tr><td>4</td><td>50 min</td><td>Feature Development</td></tr>
-    </table>
-
-    <h2>Getting Started</h2>
-    <p>See the <a href="..">main repository</a> for setup instructions.</p>
+    <div class="container">
+        <h1>Programming with AI Workshop</h1>
+        <p><strong>Audience:</strong> Applied Business Analytics Research Team<br>
+        <strong>Environment:</strong> VS Code, GitHub Copilot, Python 3.10+, Git</p>
+        
+        <h2>Workshop Overview</h2>
+        <p>This hands-on workshop teaches you how to effectively use AI assistants (like GitHub Copilot) in your development workflow while maintaining code quality through automated enforcement.</p>
+        
+        <a href="workshop.html" class="cta">Start Workshop</a>
+        
+        <h2>Workshop Phases</h2>
+        <div class="phase-grid">
+            <div class="phase-card">
+                <h3>Phase 0: Preflight Check</h3>
+                <p class="duration">5 min</p>
+                <p>Verify your environment is ready.</p>
+            </div>
+            <div class="phase-card">
+                <h3>Phase 1: The AI Workflow</h3>
+                <p class="duration">10 min</p>
+                <p>Plan-Build-Review loop and agentic workflows.</p>
+            </div>
+            <div class="phase-card">
+                <h3>Phase 2: Deterministic Setup</h3>
+                <p class="duration">20 min</p>
+                <p>Environment setup with locked dependencies.</p>
+            </div>
+            <div class="phase-card">
+                <h3>Phase 3: Reviewing Enforcement</h3>
+                <p class="duration">10 min</p>
+                <p>Inspect local enforcement mechanisms.</p>
+            </div>
+            <div class="phase-card">
+                <h3>Phase 4: Feature Development</h3>
+                <p class="duration">45 min</p>
+                <p>Execute the core development loop.</p>
+            </div>
+        </div>
+        
+        <h2>Handouts</h2>
+        <div class="handout-grid">
+            <div class="handout-card">
+                <h3><a href="handouts/principles.html">Handout 1</a></h3>
+                <p>Applied Analytics Engineering Principles</p>
+            </div>
+            <div class="handout-card">
+                <h3><a href="handouts/copilot-cheatsheet.html">Handout 2</a></h3>
+                <p>Copilot UI & Cheat Sheet</p>
+            </div>
+            <div class="handout-card">
+                <h3><a href="handouts/fallback-configs.html">Handout 3</a></h3>
+                <p>Fallback Configurations</p>
+            </div>
+        </div>
+        
+        <h2>Resources</h2>
+        <ul>
+            <li><a href="https://github.com/Cstewart-HC/programming_w_agents">GitHub Repository</a></li>
+            <li><strong>Sample Data:</strong> <code>data/retail_sample.csv</code> (December 2010 transactions)</li>
+            <li><strong>Full Dataset:</strong> <code>data/online_retail.xlsx</code></li>
+        </ul>
+        
+        <div class="note">
+            <strong>Note:</strong> The sample dataset contains 42,481 retail transactions from December 2010, sourced from the <a href="https://archive.ics.uci.edu/dataset/352/online+retail">UCI Online Retail dataset</a>.
+        </div>
+    </div>
 </body>
 </html>

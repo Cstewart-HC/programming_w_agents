@@ -2,6 +2,8 @@
 
 Welcome to the **Programming with AI Workshop** for the Applied Research team.
 
+**Workshop Materials**: [GitHub Pages](https://cstewart-hc.github.io/programming_w_agents/)
+
 ## Overview
 
 This hands-on workshop teaches you how to effectively use AI assistants (like GitHub Copilot) in your development workflow while maintaining code quality through automated enforcement.
@@ -10,17 +12,24 @@ This hands-on workshop teaches you how to effectively use AI assistants (like Gi
 
 | Phase | Duration | Focus |
 |-------|----------|-------|
-| 1. The AI Workflow | 15 min | Core loop: Plan, Build, Review; agents vs autocomplete |
-| 2. Zero-Hallucination Setup | 25 min | Environment setup, dependency management, baseline rules |
-| 3. The Hard Enforcement | 20 min | Linting configuration, pre-commit hooks, repository lockdown |
-| 4. Feature Development | 50 min | Plan, build overly complex code, watch it get blocked, refactor |
+| 0. Preflight Check | 5 min | Verify environment (VS Code, Copilot, Python, Git) |
+| 1. The AI Workflow | 10 min | Core loop: Plan, Build, Review; agents vs autocomplete |
+| 2. Deterministic Setup | 20 min | Environment setup, dependency management, baseline rules |
+| 3. Reviewing Enforcement | 10 min | Inspect linting configuration and pre-commit hooks |
+| 4. Feature Development | 45 min | Plan, build overly complex code, watch it get blocked, refactor |
 
 ## Resources
 
-- **Workshop Materials**: [GitHub Pages](./pages/)
-- **Sample Data**: `data/online_retail.xlsx`
+- **Workshop Materials**: [GitHub Pages](https://cstewart-hc.github.io/programming_w_agents/)
+- **Full Workshop Guide**: [pages/workshop.html](pages/workshop.html)
+- **Handouts**:
+  - [Handout 1: Applied Analytics Engineering Principles](pages/handouts/principles.html)
+  - [Handout 2: Copilot UI & Cheat Sheet](pages/handouts/copilot-cheatsheet.html)
+  - [Handout 3: Fallback Configurations](pages/handouts/fallback-configs.html)
+- **Sample Data**: `data/retail_sample.csv` (December 2010 transactions)
+- **Full Dataset**: `data/online_retail.xlsx`
 - **Source Code**: `src/`
-- **Reports**: `reports/`
+- **Notebooks**: `notebooks/`
 
 ## Quick Start
 
@@ -46,9 +55,15 @@ pre-commit install
 ```
 ├── .github/
 │   └── copilot-instructions.md  # AI assistant rules
-├── scripts/                     # Utility scripts
-├── data/                        # Datasets
+├── data/
+│   ├── retail_sample.csv        # Workshop sample (Dec 2010)
+│   └── online_retail.xlsx       # Full UCI dataset
+├── notebooks/                   # Jupyter notebooks
 ├── pages/                       # GitHub Pages content
+│   ├── index.html
+│   ├── workshop.html
+│   └── handouts/
+├── scripts/                     # Utility scripts
 ├── src/                         # Source code
 ├── reports/                     # Analysis reports
 ├── pyproject.toml               # Project configuration

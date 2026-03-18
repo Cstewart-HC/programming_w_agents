@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handout 3: Fallback Configurations</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; margin-top: 0; }
+        h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
+        a { color: #2b6cb0; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        pre { 
+            background: #1a202c; 
+            color: #e2e8f0; 
+            padding: 1.25rem; 
+            border-radius: 6px; 
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        pre code { background: none; padding: 0; color: inherit; }
+        .file-header {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 0.5rem 1rem;
+            border-radius: 6px 6px 0 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        .file-header + pre { border-radius: 0 0 6px 6px; margin-top: 0; }
+        .warning { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+        .nav { margin-bottom: 2rem; }
+        .nav a { color: #718096; }
+        .copy-btn {
+            background: #4a5568;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            float: right;
+            margin-top: -2rem;
+            margin-right: 0.5rem;
+        }
+        .copy-btn:hover { background: #2d3748; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p class="nav"><a href="../index.html">&larr; Back to Overview</a></p>
+        
+        <h1>Handout 3: Fallback Configurations</h1>
+        <p>If the agent fails to generate the enforcement files correctly during Phase 2, copy and paste these exact blocks.</p>
+        
+        <div class="warning">
+            <strong>Important:</strong> The <code>max-complexity = 5</code> setting below is intentionally strict for workshop demonstration purposes. For production projects, use <code>15</code> (industry standard) or adjust based on your team's conventions.
+        </div>
+        
+        <h2>pyproject.toml</h2>
+        <div class="file-header">pyproject.toml</div>
+        <pre><code>[project]
+name = "programming-with-ai-workshop"
+version = "0.1.0"
+description = "Workshop on programming with AI for Applied Research"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5</code></pre>
+
+        <h2>.pre-commit-config.yaml</h2>
+        <div class="file-header">.pre-commit-config.yaml</div>
+        <pre><code>repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.5
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format</code></pre>
+
+        <h2>Alternative: Production-Ready Configuration</h2>
+        <p>For real projects after the workshop, use these more practical settings:</p>
+        
+        <div class="file-header">pyproject.toml (production)</div>
+        <pre><code>[project]
+name = "your-project-name"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "C90", "PLR"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15
+
+[tool.ruff.lint.pylint]
+max-statements = 50
+max-args = 6</code></pre>
+
+        <h2>Quick Verification Commands</h2>
+        <p>After setting up your configs, verify they work:</p>
+        <pre><code># Install pre-commit hooks
+pre-commit install
+
+# Run manually on all files
+pre-commit run --all-files
+
+# Run only Ruff
+ruff check .
+ruff format --check .</code></pre>
+        
+        <p class="nav" style="margin-top: 2rem;"><a href="../index.html">&larr; Back to Overview</a></p>
+    </div>
+</body>
+</html>
