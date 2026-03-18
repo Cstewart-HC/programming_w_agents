@@ -64,9 +64,8 @@
         .nav-buttons .prev:hover { background: #e2e8f0; }
         .nav-buttons .next { background: var(--color-primary); color: white; }
         .nav-buttons .next:hover { background: var(--color-primary-dark); }
-        .loop-diagram { background: #ebf8ff; border-radius: 8px; padding: var(--space-md); margin: var(--space-md) 0; text-align: center; }
-        .loop-diagram .step { display: inline-block; background: white; padding: var(--space-sm) var(--space-md); border-radius: 6px; margin: var(--space-xs); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .loop-diagram .arrow { color: var(--color-primary); font-size: 1.5rem; margin: 0 0.25rem; }
+        .loop-visual { display: flex; justify-content: center; margin: var(--space-md) 0; }
+        .loop-visual svg { max-width: 100%; height: auto; }
         .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-sm); margin: var(--space-md) 0; }
         .comparison .card { padding: var(--space-sm); border-radius: 6px; }
         .comparison .old { background: #fff5f5; border: 1px solid #feb2b2; }
@@ -157,14 +156,35 @@
             <h2>The Core Loop: Plan-Build-Review</h2>
             <p>This is the rhythm you'll use throughout the workshop and in your daily work:</p>
             
-            <div class="loop-diagram">
-                <div class="step"><strong>Plan</strong><br><small>Design in Chat</small></div>
-                <span class="arrow">&rarr;</span>
-                <div class="step"><strong>Build</strong><br><small>Implement with Edits</small></div>
-                <span class="arrow">&rarr;</span>
-                <div class="step"><strong>Review</strong><br><small>AI + Hooks verify</small></div>
-                <span class="arrow">&rarr;</span>
-                <span class="arrow" style="margin-left: -1rem;">&#8635;</span>
+            <div class="loop-visual">
+                <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan-Build-Review loop diagram">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#2b6cb0"/>
+                        </marker>
+                    </defs>
+                    <path d="M 155 70 A 120 120 0 0 1 345 70" fill="none" stroke="#2b6cb0" stroke-width="2.5" marker-end="url(#arrowhead)" stroke-dasharray="none"/>
+                    <path d="M 345 210 A 120 120 0 0 1 155 210" fill="none" stroke="#2b6cb0" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+                    <path d="M 95 210 A 120 120 0 0 1 95 70" fill="none" stroke="#38a169" stroke-width="2.5" marker-end="url(#arrowhead)"/>
+                    <g>
+                        <rect x="95" y="30" width="130" height="70" rx="12" fill="#ebf8ff" stroke="#2b6cb0" stroke-width="2"/>
+                        <text x="160" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#2b6cb0">Plan</text>
+                        <text x="160" y="82" text-anchor="middle" font-size="12" fill="#4a5568">Copilot Chat</text>
+                    </g>
+                    <g>
+                        <rect x="275" y="30" width="130" height="70" rx="12" fill="#f0fff4" stroke="#38a169" stroke-width="2"/>
+                        <text x="340" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#38a169">Build</text>
+                        <text x="340" y="82" text-anchor="middle" font-size="12" fill="#4a5568">Copilot Edits</text>
+                    </g>
+                    <g>
+                        <rect x="185" y="190" width="130" height="70" rx="12" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+                        <text x="250" y="220" text-anchor="middle" font-size="18" font-weight="bold" fill="#c05621">Review</text>
+                        <text x="250" y="242" text-anchor="middle" font-size="12" fill="#4a5568">AI + Git Hooks</text>
+                    </g>
+                    <text x="272" y="108" text-anchor="middle" font-size="11" fill="#718096" font-style="italic">approve plan</text>
+                    <text x="228" y="195" text-anchor="middle" font-size="11" fill="#718096" font-style="italic">run hooks</text>
+                    <text x="52" y="145" text-anchor="middle" font-size="11" fill="#718096" font-style="italic" transform="rotate(-90 52 145)">iterate</text>
+                </svg>
             </div>
             
             <h3>1. Plan</h3>
