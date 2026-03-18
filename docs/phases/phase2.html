@@ -139,24 +139,12 @@
             </div>
             
             <div class="step-section">
-                <h3>Step 0: Create Your Project Folder</h3>
-                <p>Before we scaffold anything, create a dedicated folder for this workshop. <strong>Do not</strong> run this in your home directory or an existing project folder.</p>
-                
-                <p>In your terminal, run:</p>
-                <pre><code>mkdir retail_analysis
-cd retail_analysis</code></pre>
-                
-                <p>Verify you're in the right place:</p>
-                <pre><code>pwd</code></pre>
-                
-                <div class="note">
-                    <strong>Why this matters:</strong> Running scaffolding commands in the wrong directory can create files where they don't belong. Always start in an empty, dedicated project folder.
-                </div>
-            </div>
-            
-            <div class="step-section">
                 <h3>Step 1: The Master Scaffolding Prompt</h3>
                 <p>Open the <strong>Copilot Chat Sidebar</strong> (<code>Ctrl+Alt+I</code>) and select <strong>Agent Mode</strong> from the agent selector at the top of the panel. Agent Mode can execute terminal commands and create files simultaneously.</p>
+                
+                <div class="note" style="margin-bottom: var(--space-md);">
+                    <strong>Before you start:</strong> Make sure you are <strong>not</strong> in your home directory or an existing project folder. Check with <code>pwd</code> and navigate to an appropriate location first. Agent Mode will create a dedicated <code>retail_analysis</code> folder for you.
+                </div>
                 
                 <div class="prompt-box">
                     <div class="prompt-label">
@@ -165,7 +153,7 @@ cd retail_analysis</code></pre>
                     </div>
                     "Act as a senior Python data engineer. Execute these steps sequentially:
                     <ol>
-                        <li>Initialize a git repository. Create a Python virtual environment named <code>.venv</code> and activate it.</li>
+                        <li>Create a new directory called <code>retail_analysis</code>, navigate into it, and initialize a git repository.</li>
                         <li>Use <code>pip</code> to install the latest versions of <code>pandas</code>, <code>seaborn</code>, <code>jupyter</code>, <code>ruff</code>, and <code>pre-commit</code>.</li>
                         <li>Run <code>pip freeze > requirements.txt</code> to lock the exact versions.</li>
                         <li>Scaffold the project directory structure, creating separate folders for <code>data</code>, <code>notebooks</code>, and <code>src</code>.</li>
