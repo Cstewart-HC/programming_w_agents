@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Full workshop guide: Programming with AI assistants for Academic & Applied Research at Holland College.">
     <title>Workshop - Programming with AI</title>
     <style>
         * { box-sizing: border-box; }
@@ -43,6 +44,17 @@
         .warning { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
         .warning strong { color: #742a2a; }
         .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #2b6cb0;
+            color: white;
+            padding: 0.5rem 1rem;
+            z-index: 100;
+            border-radius: 0 0 4px 0;
+        }
+        .skip-link:focus { top: 0; }
         .note strong { color: #744210; }
         .step { margin: 1.5rem 0; padding-left: 1rem; border-left: 2px solid #cbd5e0; }
         .step-number { display: inline-block; background: #2b6cb0; color: white; width: 24px; height: 24px; border-radius: 50%; text-align: center; line-height: 24px; font-size: 0.875rem; margin-right: 0.5rem; }
@@ -55,7 +67,9 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container">
+        <main id="main-content">
         <p class="nav"><a href="index.html">&larr; Back to Overview</a></p>
         
         <h1>Hands-On Workshop: Programming Agents & Enforcing Standards</h1>
@@ -237,6 +251,7 @@
         </div>
         
         <p class="nav" style="margin-top: 2rem;"><a href="index.html">&larr; Back to Overview</a></p>
+        </main>
         
         <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; color: #a0aec0; font-size: 0.8rem; text-align: center;">
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>

@@ -3,174 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Phase 4: Feature Development - Execute the core development loop: build intentionally complex code, watch it get blocked, then refactor.">
     <title>Phase 4: Feature Development - Programming with AI Workshop</title>
     <style>
+        :root {
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --color-primary: #2b6cb0;
+            --color-primary-dark: #2c5282;
+            --color-success: #38a169;
+            --color-warning: #dd6b20;
+            --color-danger: #e53e3e;
+            --color-text: #2d3748;
+            --color-text-light: #718096;
+            --color-text-muted: #a0aec0;
+            --color-bg: #f7fafc;
+            --color-bg-card: white;
+            --color-border: #e2e8f0;
+        }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem var(--space-sm);
+            z-index: 100;
+            border-radius: 0 0 4px 0;
+        }
+        .skip-link:focus { top: 0; }
         * { box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; color: #2d3748; background: #f7fafc; }
-        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 900px; margin: 0 auto; padding: var(--space-lg); line-height: 1.6; color: var(--color-text); background: var(--color-bg); }
+        .container { background: var(--color-bg-card); padding: var(--space-lg); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         h1 { color: #1a202c; margin-top: 0; }
-        h2 { color: #2b6cb0; margin-top: 2rem; }
-        h3 { color: #4a5568; margin-top: 1.5rem; }
-        h4 { color: #718096; margin-top: 1rem; }
-        .progress-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 0 1rem; }
+        h2 { color: var(--color-primary); margin-top: var(--space-lg); }
+        h3 { color: #4a5568; margin-top: var(--space-md); }
+        h4 { color: var(--color-text-light); margin-top: var(--space-sm); }
+        .progress-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg); padding: 0 var(--space-sm); }
         .progress-bar .step { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
-        .progress-bar .step::before { content: ''; position: absolute; top: 16px; left: 50%; right: -50%; height: 2px; background: #e2e8f0; z-index: 0; }
+        .progress-bar .step::before { content: ''; position: absolute; top: 16px; left: 50%; right: -50%; height: 2px; background: var(--color-border); z-index: 0; }
         .progress-bar .step:last-child::before { display: none; }
-        .progress-bar .step.active::before, .progress-bar .step.completed::before { background: #38a169; }
-        .progress-bar .step .circle { width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: bold; color: #718096; z-index: 1; position: relative; }
-        .progress-bar .step.active .circle { background: #2b6cb0; color: white; }
-        .progress-bar .step.completed .circle { background: #38a169; color: white; }
-        .progress-bar .step .label { font-size: 0.75rem; margin-top: 0.5rem; color: #718096; text-align: center; }
-        .progress-bar .step.active .label { color: #2b6cb0; font-weight: 600; }
-        .progress-bar .step.completed .label { color: #38a169; }
-        .phase-badge { display: inline-block; background: #2b6cb0; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-bottom: 0.5rem; }
-        .time-badge { display: inline-block; background: #e2e8f0; color: #4a5568; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-left: 0.5rem; }
-        .objective { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 1rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+        .progress-bar .step.completed::before { background: var(--color-success); }
+        .progress-bar .step.active::before { background: var(--color-primary); }
+        .progress-bar .step .circle { width: 32px; height: 32px; border-radius: 50%; background: var(--color-border); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: bold; color: var(--color-text-light); z-index: 1; position: relative; }
+        .progress-bar .step.active .circle { background: var(--color-primary); color: white; }
+        .progress-bar .step.completed .circle { background: var(--color-success); color: white; }
+        .progress-bar .step.completed a { text-decoration: none; }
+        .progress-bar .step .label { font-size: 0.75rem; margin-top: var(--space-xs); color: var(--color-text-light); text-align: center; }
+        .progress-bar .step.active .label { color: var(--color-primary); font-weight: 600; }
+        .progress-bar .step.completed .label { color: var(--color-success); }
+        .phase-badge { display: inline-block; background: var(--color-primary); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-bottom: var(--space-xs); }
+        .time-badge { display: inline-block; background: var(--color-border); color: #4a5568; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-left: var(--space-xs); }
+        .objective { background: #e6fffa; border-left: 4px solid #38b2ac; padding: var(--space-sm); margin: var(--space-md) 0; border-radius: 0 4px 4px 0; }
         .objective strong { color: #234e52; }
         code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-        pre { background: #1a202c; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.9rem; }
+        pre { background: #1a202c; color: #e2e8f0; padding: var(--space-sm); border-radius: 6px; overflow-x: auto; font-size: 0.9rem; }
         pre code { background: none; padding: 0; color: inherit; }
-        .nav-buttons { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
-        .nav-buttons a { display: inline-flex; align-items: center; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--color-border); }
+        .nav-buttons a { display: inline-flex; align-items: center; padding: 0.75rem var(--space-md); border-radius: 6px; text-decoration: none; font-weight: 500; }
         .nav-buttons .prev { background: #edf2f7; color: #4a5568; }
         .nav-buttons .prev:hover { background: #e2e8f0; }
-        .nav-buttons .next { background: #38a169; color: white; }
+        .nav-buttons .next { background: var(--color-success); color: white; }
         .nav-buttons .next:hover { background: #2f855a; }
-        .step-section { margin: 2rem 0; padding: 1.5rem; background: #f7fafc; border-radius: 8px; border-left: 4px solid #2b6cb0; }
-        .step-section h3 { margin-top: 0; color: #2b6cb0; display: flex; align-items: center; gap: 0.5rem; }
-        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #2b6cb0; color: white; border-radius: 50%; font-size: 0.875rem; }
-        .prompt-box { background: #f0fff4; border: 1px solid #9ae6b4; padding: 1rem; border-radius: 6px; margin: 1rem 0; font-size: 0.95rem; }
-        .prompt-box::before { content: "Copy this prompt:"; display: block; font-weight: bold; color: #276749; margin-bottom: 0.5rem; }
-        .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
-        .success { background: #f0fff4; border-left: 4px solid #38a169; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
-        .warning { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
-        .breadcrumb { margin-bottom: 1rem; }
-        .breadcrumb a { color: #718096; text-decoration: none; font-size: 0.9rem; }
-        .breadcrumb a:hover { color: #2b6cb0; }
-        ul { padding-left: 1.5rem; }
+        .step-section { margin: var(--space-lg) 0; padding: var(--space-md); background: #f7fafc; border-radius: 8px; border-left: 4px solid var(--color-primary); }
+        .step-section h3 { margin-top: 0; color: var(--color-primary); display: flex; align-items: center; gap: var(--space-xs); }
+        .step-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--color-primary); color: white; border-radius: 50%; font-size: 0.875rem; }
+        .prompt-box { background: #f0fff4; border: 1px solid #9ae6b4; padding: var(--space-sm); border-radius: 6px; margin: var(--space-sm) 0; font-size: 0.95rem; position: relative; }
+        .prompt-box .prompt-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xs); }
+        .prompt-box .prompt-label strong { color: #276749; }
+        .copy-btn {
+            background: #276749;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.15s;
+        }
+        .copy-btn:hover { background: #22543d; }
+        .copy-btn.copied { background: var(--color-success); }
+        .note { background: #fffaf0; border-left: 4px solid var(--color-warning); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
+        .success { background: #f0fff4; border-left: 4px solid var(--color-success); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
+        .warning { background: #fff5f5; border-left: 4px solid var(--color-danger); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
+        .breadcrumb { margin-bottom: var(--space-sm); }
+        .breadcrumb a { color: var(--color-text-light); text-decoration: none; font-size: 0.9rem; }
+        .breadcrumb a:hover { color: var(--color-primary); }
+        ul { padding-left: var(--space-md); }
         li { margin-bottom: 0.5rem; }
+        @media (max-width: 600px) {
+            body { padding: var(--space-sm); }
+            .container { padding: var(--space-sm); }
+            .progress-bar .step .label { display: none; }
+            .progress-bar .step .circle { width: 24px; height: 24px; font-size: 0.75rem; }
+            .progress-bar .step::before { top: 12px; }
+            .nav-buttons { flex-direction: column; gap: var(--space-xs); }
+            .nav-buttons a { text-align: center; justify-content: center; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container">
-        <nav class="progress-bar">
-            <div class="step completed"><div class="circle">&#10003;</div><span class="label">Preflight</span></div>
-            <div class="step completed"><div class="circle">&#10003;</div><span class="label">AI Workflow</span></div>
-            <div class="step completed"><div class="circle">&#10003;</div><span class="label">Setup</span></div>
-            <div class="step completed"><div class="circle">&#10003;</div><span class="label">Enforcement</span></div>
-            <div class="step active"><div class="circle">4</div><span class="label">Development</span></div>
+        <nav class="progress-bar" aria-label="Workshop progress">
+            <div class="step completed">
+                <a href="phase0.html" aria-label="Go to Phase 0: Preflight"><div class="circle">&#10003;</div></a>
+                <span class="label">Preflight</span>
+            </div>
+            <div class="step completed">
+                <a href="phase1.html" aria-label="Go to Phase 1: AI Workflow"><div class="circle">&#10003;</div></a>
+                <span class="label">AI Workflow</span>
+            </div>
+            <div class="step completed">
+                <a href="phase2.html" aria-label="Go to Phase 2: Setup"><div class="circle">&#10003;</div></a>
+                <span class="label">Setup</span>
+            </div>
+            <div class="step completed">
+                <a href="phase3.html" aria-label="Go to Phase 3: Enforcement"><div class="circle">&#10003;</div></a>
+                <span class="label">Enforcement</span>
+            </div>
+            <div class="step active" aria-current="step">
+                <div class="circle" aria-label="Phase 4: Current">4</div>
+                <span class="label">Development</span>
+            </div>
         </nav>
 
-        <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
-        
-        <span class="phase-badge">Phase 4</span>
-        <span class="time-badge">45 min</span>
-        <h1>Feature Development</h1>
-        
-        <div class="objective">
-            <strong>Objective:</strong> Execute the core development loop using the UCI Online Retail dataset. You'll intentionally write complex code, watch it get blocked, then refactor.
-        </div>
-        
-        <div class="step-section">
-            <h3><span class="step-num">1</span> Data Retrieval</h3>
-            <p>Use the agent to fetch the dataset directly from the workshop repository.</p>
-            <p>Open <strong>Terminal Chat</strong> (<code>Ctrl+I</code>) and prompt:</p>
+        <main id="main-content">
+            <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
             
-            <div class="prompt-box">
-                "Download the <code>retail_sample.csv</code> file from the raw GitHub URL <code>https://raw.githubusercontent.com/Cstewart-HC/programming_w_agents/main/data/retail_sample.csv</code> and save it directly into my local <code>data/</code> directory."
-            </div>
-        </div>
-        
-        <div class="step-section">
-            <h3><span class="step-num">2</span> Plan</h3>
-            <p>In the <strong>Copilot Chat Sidebar</strong> (<code>Ctrl+Alt+I</code>), map out the approach:</p>
+            <span class="phase-badge">Phase 4</span>
+            <span class="time-badge">45 min</span>
+            <h1>Feature Development</h1>
             
-            <div class="prompt-box">
-                "Plan the implementation for a script in <code>src/analysis.py</code> that ingests <code>data/retail_sample.csv</code>. Requirements:
-                <ol>
-                    <li>Explicitly validate the schema and parse the dates defensively.</li>
-                    <li>Calculate total revenue (Quantity * UnitPrice) per Country.</li>
-                    <li>Flag any returns (negative quantities) or records with missing CustomerIDs as anomalies.</li>
-                    <li>The output must print two clean console tables: a revenue summary by country and an anomaly alert list.</li>
-                </ol>
-                Outline the necessary typed helper functions with docstrings first."
+            <div class="objective">
+                <strong>Objective:</strong> Execute the core development loop using the UCI Online Retail dataset. You'll intentionally write complex code, watch it get blocked, then refactor.
             </div>
             
-            <div class="note">
-                <strong>Tip:</strong> Take a moment to review the plan before proceeding. Make sure you understand the proposed structure.
-            </div>
-        </div>
-        
-        <div class="step-section">
-            <h3><span class="step-num">3</span> Build (Intentionally Poor)</h3>
-            <p>Open <strong>Copilot Edits</strong> (<code>Ctrl+Shift+I</code>). We'll intentionally ask for bad code:</p>
-            
-            <div class="prompt-box">
-                "Implement the plan we just discussed in <code>src/analysis.py</code>. However, do it entirely within a single, highly nested function named <code>process_retail_data</code> ignoring the helper function outline."
-            </div>
-            
-            <div class="warning">
-                <strong>Why are we doing this?</strong> We want to trigger the pre-commit hook! This simulates what happens when you (or an AI) writes code without considering complexity limits.
-            </div>
-        </div>
-        
-        <div class="step-section">
-            <h3><span class="step-num">4</span> Review</h3>
-            
-            <h4>Stage A: AI Review (Soft Check)</h4>
-            <p>With <code>src/analysis.py</code> active, open the <strong>Copilot Chat Sidebar</strong>:</p>
-            
-            <div class="prompt-box">
-                "/review Does this code adhere to the complexity rules defined in my workspace instructions?"
+            <div class="step-section">
+                <h3><span class="step-num">1</span> Data Retrieval</h3>
+                <p>Use the agent to fetch the dataset directly from the workshop repository.</p>
+                <p>Open <strong>Terminal Chat</strong> (<code>Ctrl+I</code>) and prompt:</p>
+                
+                <div class="prompt-box">
+                    <div class="prompt-label">
+                        <strong>Copy this prompt:</strong>
+                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    </div>
+                    "Download the <code>retail_sample.csv</code> file from the raw GitHub URL <code>https://raw.githubusercontent.com/Cstewart-HC/programming_w_agents/main/data/retail_sample.csv</code> and save it directly into my local <code>data/</code> directory."
+                </div>
             </div>
             
-            <p><em>Copilot may warn you, but AI is fallible. We need a hard gate.</em></p>
-            
-            <h4>Stage B: Hard Enforcement</h4>
-            <p>In your terminal, run:</p>
-            <pre><code>pre-commit run --all-files</code></pre>
-            
-            <div class="warning">
-                <strong>Expected Result:</strong> Ruff will fail with something like:
-                <pre><code>C901 `process_retail_data` is too complex (X > 5)</code></pre>
-                This is the hook doing its job!
+            <div class="step-section">
+                <h3><span class="step-num">2</span> Plan</h3>
+                <p>In the <strong>Copilot Chat Sidebar</strong> (<code>Ctrl+Alt+I</code>), map out the approach:</p>
+                
+                <div class="prompt-box">
+                    <div class="prompt-label">
+                        <strong>Copy this prompt:</strong>
+                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    </div>
+                    "Plan the implementation for a script in <code>src/analysis.py</code> that ingests <code>data/retail_sample.csv</code>. Requirements:
+                    <ol>
+                        <li>Explicitly validate the schema and parse the dates defensively.</li>
+                        <li>Calculate total revenue (Quantity * UnitPrice) per Country.</li>
+                        <li>Flag any returns (negative quantities) or records with missing CustomerIDs as anomalies.</li>
+                        <li>The output must print two clean console tables: a revenue summary by country and an anomaly alert list.</li>
+                    </ol>
+                    Outline the necessary typed helper functions with docstrings first."
+                </div>
+                
+                <div class="note">
+                    <strong>Tip:</strong> Take a moment to review the plan before proceeding. Make sure you understand the proposed structure.
+                </div>
             </div>
-        </div>
-        
-        <div class="step-section">
-            <h3><span class="step-num">5</span> Refactor</h3>
-            <p>Return to <strong>Copilot Edits</strong> and prompt:</p>
             
-            <div class="prompt-box">
-                "The code failed my pre-commit hook due to high cognitive complexity. Refactor <code>process_retail_data</code> into the smaller, modular helper functions we originally planned so it passes the Ruff linter."
+            <div class="step-section">
+                <h3><span class="step-num">3</span> Build (Intentionally Poor)</h3>
+                <p>Open <strong>Copilot Edits</strong> (<code>Ctrl+Shift+I</code>). We'll intentionally ask for bad code:</p>
+                
+                <div class="prompt-box">
+                    <div class="prompt-label">
+                        <strong>Copy this prompt:</strong>
+                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    </div>
+                    "Implement the plan we just discussed in <code>src/analysis.py</code>. However, do it entirely within a single, highly nested function named <code>process_retail_data</code> ignoring the helper function outline."
+                </div>
+                
+                <div class="warning">
+                    <strong>Why are we doing this?</strong> We want to trigger the pre-commit hook! This simulates what happens when you (or an AI) writes code without considering complexity limits.
+                </div>
             </div>
             
-            <p>Accept the refactored code. Run <code>pre-commit run --all-files</code> again to verify it passes:</p>
-            <pre><code>pre-commit run --all-files</code></pre>
+            <div class="step-section">
+                <h3><span class="step-num">4</span> Review</h3>
+                
+                <h4>Stage A: AI Review (Soft Check)</h4>
+                <p>With <code>src/analysis.py</code> active, open the <strong>Copilot Chat Sidebar</strong>:</p>
+                
+                <div class="prompt-box">
+                    <div class="prompt-label">
+                        <strong>Copy this prompt:</strong>
+                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    </div>
+                    "/review Does this code adhere to the complexity rules defined in my workspace instructions?"
+                </div>
+                
+                <p><em>Copilot may warn you, but AI is fallible. We need a hard gate.</em></p>
+                
+                <h4>Stage B: Hard Enforcement</h4>
+                <p>In your terminal, run:</p>
+                <pre><code>pre-commit run --all-files</code></pre>
+                
+                <div class="warning">
+                    <strong>Expected Result:</strong> Ruff will fail with something like:
+                    <pre><code>C901 `process_retail_data` is too complex (X > 5)</code></pre>
+                    This is the hook doing its job!
+                </div>
+            </div>
             
-            <div class="success">
-                <strong>Success!</strong> Once the hooks pass, stage and commit your code:
-                <pre><code>git add src/analysis.py
+            <div class="step-section">
+                <h3><span class="step-num">5</span> Refactor</h3>
+                <p>Return to <strong>Copilot Edits</strong> and prompt:</p>
+                
+                <div class="prompt-box">
+                    <div class="prompt-label">
+                        <strong>Copy this prompt:</strong>
+                        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                    </div>
+                    "The code failed my pre-commit hook due to high cognitive complexity. Refactor <code>process_retail_data</code> into the smaller, modular helper functions we originally planned so it passes the Ruff linter."
+                </div>
+                
+                <p>Accept the refactored code. Run <code>pre-commit run --all-files</code> again to verify it passes:</p>
+                <pre><code>pre-commit run --all-files</code></pre>
+                
+                <div class="success">
+                    <strong>Success!</strong> Once the hooks pass, stage and commit your code:
+                    <pre><code>git add src/analysis.py
 git commit -m "Add retail data analysis script"</code></pre>
+                </div>
             </div>
-        </div>
-        
-        <h2>Key Takeaways</h2>
-        <ul>
-            <li><strong>Plan first, build second</strong> - The Plan-Build-Review loop prevents wasted effort</li>
-            <li><strong>AI is a soft check, hooks are hard gates</strong> - Trust the automated enforcement</li>
-            <li><strong>Complexity limits force better design</strong> - Breaking code into small functions isn't just about passing linting; it's about maintainability</li>
-            <li><strong>Iterate with the AI</strong> - Feed error messages back to the agent to get targeted fixes</li>
-        </ul>
+            
+            <h2>Key Takeaways</h2>
+            <ul>
+                <li><strong>Plan first, build second</strong> - The Plan-Build-Review loop prevents wasted effort</li>
+                <li><strong>AI is a soft check, hooks are hard gates</strong> - Trust the automated enforcement</li>
+                <li><strong>Complexity limits force better design</strong> - Breaking code into small functions isn't just about passing linting; it's about maintainability</li>
+                <li><strong>Iterate with the AI</strong> - Feed error messages back to the agent to get targeted fixes</li>
+            </ul>
+        </main>
 
         <div class="nav-buttons">
             <a href="phase3.html" class="prev">&larr; Phase 3: Enforcement</a>
             <a href="../index.html" class="next">Workshop Complete! &check;</a>
         </div>
         
-        <footer style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; color: #a0aec0; font-size: 0.8rem; text-align: center;">
+        <footer style="margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.8rem; text-align: center;">
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>
         </footer>
     </div>
+    <script>
+        function copyPrompt(btn) {
+            var promptText = btn.closest('.prompt-box').innerText.replace('Copy this prompt:', '').replace('Copied!', '').trim();
+            navigator.clipboard.writeText(promptText).then(function() {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>

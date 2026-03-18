@@ -3,55 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Programming with AI Workshop - Hands-on workshop on programming with AI assistants for Academic & Applied Research at Holland College.">
     <title>Programming with AI Workshop</title>
     <style>
+        :root {
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --color-primary: #2b6cb0;
+            --color-primary-dark: #2c5282;
+            --color-success: #38a169;
+            --color-warning: #dd6b20;
+            --color-text: #2d3748;
+            --color-text-light: #718096;
+            --color-text-muted: #a0aec0;
+            --color-bg: #f7fafc;
+            --color-bg-card: white;
+            --color-border: #e2e8f0;
+        }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem var(--space-sm);
+            z-index: 100;
+            border-radius: 0 0 4px 0;
+        }
+        .skip-link:focus { top: 0; }
         * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: var(--space-lg);
             line-height: 1.6;
-            color: #2d3748;
-            background: #f7fafc;
+            color: var(--color-text);
+            background: var(--color-bg);
         }
-        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .container { background: var(--color-bg-card); padding: var(--space-lg); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         h1 { color: #1a202c; margin-top: 0; }
-        h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
-        a { color: #2b6cb0; text-decoration: none; }
+        h2 { color: var(--color-primary); border-bottom: 2px solid #bee3f8; padding-bottom: var(--space-xs); margin-top: var(--space-lg); }
+        a { color: var(--color-primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
         .cta {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: #2b6cb0;
+            gap: var(--space-xs);
+            background: var(--color-primary);
             color: white;
-            padding: 1rem 2rem;
+            padding: var(--space-sm) var(--space-lg);
             border-radius: 6px;
-            margin-top: 1rem;
+            margin-top: var(--space-sm);
             font-size: 1.1rem;
             font-weight: 500;
+            transition: background 0.15s;
         }
-        .cta:hover { background: #2c5282; text-decoration: none; }
+        .cta:hover { background: var(--color-primary-dark); text-decoration: none; }
         .cta .arrow { font-size: 1.25rem; }
         .phase-timeline {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
-            margin: 1.5rem 0;
+            gap: var(--space-xs);
+            margin: var(--space-md) 0;
         }
         .phase-item {
             display: flex;
             align-items: center;
-            padding: 1rem;
+            padding: var(--space-sm);
             background: #f7fafc;
             border-radius: 6px;
-            border-left: 4px solid #2b6cb0;
-            transition: all 0.2s;
+            border-left: 4px solid var(--color-primary);
+            transition: all 0.15s;
+            text-decoration: none;
+            color: inherit;
         }
         .phase-item:hover {
             background: #edf2f7;
             transform: translateX(4px);
+            text-decoration: none;
         }
         .phase-item .num {
             display: flex;
@@ -59,130 +92,137 @@
             justify-content: center;
             width: 32px;
             height: 32px;
-            background: #2b6cb0;
+            background: var(--color-primary);
             color: white;
             border-radius: 50%;
             font-weight: bold;
-            margin-right: 1rem;
+            margin-right: var(--space-sm);
             flex-shrink: 0;
         }
         .phase-item .content { flex: 1; }
         .phase-item .title { font-weight: 600; color: #1a202c; }
-        .phase-item .duration { color: #718096; font-size: 0.875rem; }
+        .phase-item .duration { color: var(--color-text-light); font-size: 0.875rem; }
         .phase-item .arrow { color: #a0aec0; margin-left: auto; }
-        .handout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .handout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-sm); margin: var(--space-md) 0; }
         .handout-card {
             background: #fffaf0;
-            padding: 1rem;
+            padding: var(--space-sm);
             border-radius: 6px;
-            border-left: 4px solid #dd6b20;
+            border-left: 4px solid var(--color-warning);
         }
-        .handout-card h3 { margin: 0 0 0.5rem 0; color: #c05621; font-size: 1rem; }
+        .handout-card h3 { margin: 0 0 var(--space-xs) 0; color: #c05621; font-size: 1rem; }
         code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-        .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
-        .resources-list { background: #f7fafc; padding: 1rem 1.5rem; border-radius: 6px; }
-        .resources-list ul { margin: 0; padding-left: 1.5rem; }
-        .resources-list li { margin-bottom: 0.5rem; }
+        .note { background: #fffaf0; border-left: 4px solid var(--color-warning); padding: var(--space-sm); margin: var(--space-sm) 0; border-radius: 0 4px 4px 0; }
+        .resources-list { background: #f7fafc; padding: var(--space-sm) var(--space-md); border-radius: 6px; }
+        .resources-list ul { margin: 0; padding-left: var(--space-md); }
+        .resources-list li { margin-bottom: var(--space-xs); }
         .total-time {
             display: inline-block;
             background: #e6fffa;
             color: #234e52;
-            padding: 0.5rem 1rem;
+            padding: var(--space-xs) var(--space-sm);
             border-radius: 20px;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: var(--space-sm);
+        }
+        @media (max-width: 600px) {
+            body { padding: var(--space-sm); }
+            .container { padding: var(--space-sm); }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container">
-        <h1>Programming with AI Workshop</h1>
-        <p><strong>Audience:</strong> Academic & Applied Research, Holland College<br>
-        <strong>Environment:</strong> VS Code, GitHub Copilot, Python 3.10+, Git</p>
-        
-        <span class="total-time">Total Duration: ~90 minutes</span>
-        
-        <h2>Workshop Overview</h2>
-        <p>This hands-on workshop teaches you how to effectively use AI assistants (like GitHub Copilot) in your development workflow while maintaining code quality through automated enforcement.</p>
-        
-        <a href="phases/phase0.html" class="cta">
-            Start Workshop <span class="arrow">&rarr;</span>
-        </a>
-        
-        <h2>Workshop Phases</h2>
-        <div class="phase-timeline">
-            <a href="phases/phase0.html" class="phase-item">
-                <span class="num">0</span>
-                <div class="content">
-                    <div class="title">Preflight Check</div>
-                    <div class="duration">5 min - Verify your environment</div>
-                </div>
-                <span class="arrow">&rarr;</span>
+        <main id="main-content">
+            <h1>Programming with AI Workshop</h1>
+            <p><strong>Audience:</strong> Academic & Applied Research, Holland College<br>
+            <strong>Environment:</strong> VS Code, GitHub Copilot, Python 3.10+, Git</p>
+            
+            <span class="total-time">Total Duration: ~90 minutes</span>
+            
+            <h2>Workshop Overview</h2>
+            <p>This hands-on workshop teaches you how to effectively use AI assistants (like GitHub Copilot) in your development workflow while maintaining code quality through automated enforcement.</p>
+            
+            <a href="phases/phase0.html" class="cta">
+                Start Workshop <span class="arrow">&rarr;</span>
             </a>
-            <a href="phases/phase1.html" class="phase-item">
-                <span class="num">1</span>
-                <div class="content">
-                    <div class="title">The AI Workflow</div>
-                    <div class="duration">10 min - Plan-Build-Review loop</div>
-                </div>
-                <span class="arrow">&rarr;</span>
-            </a>
-            <a href="phases/phase2.html" class="phase-item">
-                <span class="num">2</span>
-                <div class="content">
-                    <div class="title">Deterministic Setup</div>
-                    <div class="duration">20 min - Environment and dependencies</div>
-                </div>
-                <span class="arrow">&rarr;</span>
-            </a>
-            <a href="phases/phase3.html" class="phase-item">
-                <span class="num">3</span>
-                <div class="content">
-                    <div class="title">Reviewing Enforcement</div>
-                    <div class="duration">10 min - Inspect linting and hooks</div>
-                </div>
-                <span class="arrow">&rarr;</span>
-            </a>
-            <a href="phases/phase4.html" class="phase-item">
-                <span class="num">4</span>
-                <div class="content">
-                    <div class="title">Feature Development</div>
-                    <div class="duration">45 min - Build, fail, refactor</div>
-                </div>
-                <span class="arrow">&rarr;</span>
-            </a>
-        </div>
-        
-        <h2>Handouts</h2>
-        <div class="handout-grid">
-            <div class="handout-card">
-                <h3><a href="handouts/principles.html">Handout 1</a></h3>
-                <p>Applied Analytics Engineering Principles</p>
+            
+            <h2>Workshop Phases</h2>
+            <div class="phase-timeline">
+                <a href="phases/phase0.html" class="phase-item">
+                    <span class="num">0</span>
+                    <div class="content">
+                        <div class="title">Preflight Check</div>
+                        <div class="duration">5 min - Verify your environment</div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+                <a href="phases/phase1.html" class="phase-item">
+                    <span class="num">1</span>
+                    <div class="content">
+                        <div class="title">The AI Workflow</div>
+                        <div class="duration">10 min - Plan-Build-Review loop</div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+                <a href="phases/phase2.html" class="phase-item">
+                    <span class="num">2</span>
+                    <div class="content">
+                        <div class="title">Deterministic Setup</div>
+                        <div class="duration">20 min - Environment and dependencies</div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+                <a href="phases/phase3.html" class="phase-item">
+                    <span class="num">3</span>
+                    <div class="content">
+                        <div class="title">Reviewing Enforcement</div>
+                        <div class="duration">10 min - Inspect linting and hooks</div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
+                <a href="phases/phase4.html" class="phase-item">
+                    <span class="num">4</span>
+                    <div class="content">
+                        <div class="title">Feature Development</div>
+                        <div class="duration">45 min - Build, fail, refactor</div>
+                    </div>
+                    <span class="arrow">&rarr;</span>
+                </a>
             </div>
-            <div class="handout-card">
-                <h3><a href="handouts/copilot-cheatsheet.html">Handout 2</a></h3>
-                <p>Copilot UI & Cheat Sheet</p>
+            
+            <h2>Handouts</h2>
+            <div class="handout-grid">
+                <div class="handout-card">
+                    <h3><a href="handouts/principles.html">Handout 1</a></h3>
+                    <p>Applied Analytics Engineering Principles</p>
+                </div>
+                <div class="handout-card">
+                    <h3><a href="handouts/copilot-cheatsheet.html">Handout 2</a></h3>
+                    <p>Copilot UI & Cheat Sheet</p>
+                </div>
+                <div class="handout-card">
+                    <h3><a href="handouts/fallback-configs.html">Handout 3</a></h3>
+                    <p>Fallback Configurations</p>
+                </div>
             </div>
-            <div class="handout-card">
-                <h3><a href="handouts/fallback-configs.html">Handout 3</a></h3>
-                <p>Fallback Configurations</p>
+            
+            <h2>Resources</h2>
+            <div class="resources-list">
+                <ul>
+                    <li><a href="https://github.com/Cstewart-HC/programming_w_agents">GitHub Repository</a></li>
+                    <li><strong>Sample Data:</strong> <code>data/retail_sample.csv</code> (December 2010 transactions, 42K+ rows)</li>
+                    <li><strong>Full Dataset:</strong> <code>data/online_retail.xlsx</code></li>
+                    <li><a href="workshop.html">View Full Workshop (Single Page)</a></li>
+                </ul>
             </div>
-        </div>
-        
-        <h2>Resources</h2>
-        <div class="resources-list">
-            <ul>
-                <li><a href="https://github.com/Cstewart-HC/programming_w_agents">GitHub Repository</a></li>
-                <li><strong>Sample Data:</strong> <code>data/retail_sample.csv</code> (December 2010 transactions, 42K+ rows)</li>
-                <li><strong>Full Dataset:</strong> <code>data/online_retail.xlsx</code></li>
-                <li><a href="workshop.html">View Full Workshop (Single Page)</a></li>
-            </ul>
-        </div>
-        
-        <div class="note">
-            <strong>Note:</strong> The sample dataset contains 42,481 retail transactions from December 2010, sourced from the <a href="https://archive.ics.uci.edu/dataset/352/online+retail">UCI Online Retail dataset</a>.
-        </div>
-        <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; color: #a0aec0; font-size: 0.8rem; text-align: center;">
+            
+            <div class="note">
+                <strong>Note:</strong> The sample dataset contains 42,481 retail transactions from December 2010, sourced from the <a href="https://archive.ics.uci.edu/dataset/352/online+retail">UCI Online Retail dataset</a>.
+            </div>
+        </main>
+        <footer style="margin-top: var(--space-xl); padding-top: var(--space-md); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.8rem; text-align: center;">
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>
         </footer>
     </div>

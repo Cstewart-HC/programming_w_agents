@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Copilot UI Cheat Sheet - Essential commands and shortcuts for GitHub Copilot in VS Code.">
     <title>Handout 2: Copilot UI & Cheat Sheet</title>
     <style>
         * { box-sizing: border-box; }
@@ -19,6 +20,17 @@
         h1 { color: #1a202c; margin-top: 0; }
         h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
         h3 { color: #4a5568; }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #2b6cb0;
+            color: white;
+            padding: 0.5rem 1rem;
+            z-index: 100;
+            border-radius: 0 0 4px 0;
+        }
+        .skip-link:focus { top: 0; }
         a { color: #2b6cb0; text-decoration: none; }
         a:hover { text-decoration: underline; }
         code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
@@ -63,7 +75,9 @@
     </style>
 </head>
 <body>
-    <div class="container">
+        <a href="#main-content" class="skip-link">Skip to main content</a>
+        <div class="container">
+        <main id="main-content">
         <p class="nav"><a href="../index.html">&larr; Back to Overview</a></p>
         
         <h1>Handout 2: Copilot UI & Cheat Sheet</h1>
@@ -151,6 +165,7 @@
         </ul>
         
         <p class="nav" style="margin-top: 2rem;"><a href="../index.html">&larr; Back to Overview</a></p>
+        </main>
         
         <footer style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; color: #a0aec0; font-size: 0.8rem; text-align: center;">
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>

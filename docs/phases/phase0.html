@@ -3,26 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Phase 0: Preflight Check - Verify your environment before starting the Programming with AI Workshop.">
     <title>Phase 0: Preflight Check - Programming with AI Workshop</title>
     <style>
+        :root {
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 1.5rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
+            --color-primary: #2b6cb0;
+            --color-primary-dark: #2c5282;
+            --color-success: #38a169;
+            --color-warning: #dd6b20;
+            --color-danger: #e53e3e;
+            --color-text: #2d3748;
+            --color-text-light: #718096;
+            --color-text-muted: #a0aec0;
+            --color-bg: #f7fafc;
+            --color-bg-card: white;
+            --color-border: #e2e8f0;
+        }
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem var(--space-sm);
+            z-index: 100;
+            border-radius: 0 0 4px 0;
+        }
+        .skip-link:focus { top: 0; }
         * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: var(--space-lg);
             line-height: 1.6;
-            color: #2d3748;
-            background: #f7fafc;
+            color: var(--color-text);
+            background: var(--color-bg);
         }
-        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .container { background: var(--color-bg-card); padding: var(--space-lg); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         h1 { color: #1a202c; margin-top: 0; }
         .progress-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding: 0 1rem;
+            margin-bottom: var(--space-lg);
+            padding: 0 var(--space-sm);
         }
         .progress-bar .step {
             display: flex;
@@ -38,105 +68,131 @@
             left: 50%;
             right: -50%;
             height: 2px;
-            background: #e2e8f0;
+            background: var(--color-border);
             z-index: 0;
         }
         .progress-bar .step:last-child::before { display: none; }
-        .progress-bar .step.active::before { background: #2b6cb0; }
-        .progress-bar .step.completed::before { background: #38a169; }
+        .progress-bar .step.active::before { background: var(--color-primary); }
         .progress-bar .step .circle {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background: #e2e8f0;
+            background: var(--color-border);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.875rem;
             font-weight: bold;
-            color: #718096;
+            color: var(--color-text-light);
             z-index: 1;
             position: relative;
         }
-        .progress-bar .step.active .circle { background: #2b6cb0; color: white; }
-        .progress-bar .step.completed .circle { background: #38a169; color: white; }
+        .progress-bar .step.active .circle { background: var(--color-primary); color: white; }
         .progress-bar .step .label {
             font-size: 0.75rem;
-            margin-top: 0.5rem;
-            color: #718096;
+            margin-top: var(--space-xs);
+            color: var(--color-text-light);
             text-align: center;
         }
-        .progress-bar .step.active .label { color: #2b6cb0; font-weight: 600; }
+        .progress-bar .step.active .label { color: var(--color-primary); font-weight: 600; }
         .phase-badge {
             display: inline-block;
-            background: #2b6cb0;
+            background: var(--color-primary);
             color: white;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.875rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-xs);
         }
         .time-badge {
             display: inline-block;
-            background: #e2e8f0;
+            background: var(--color-border);
             color: #4a5568;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
             font-size: 0.875rem;
-            margin-left: 0.5rem;
+            margin-left: var(--space-xs);
         }
         .objective {
             background: #e6fffa;
             border-left: 4px solid #38b2ac;
-            padding: 1rem;
-            margin: 1.5rem 0;
+            padding: var(--space-sm);
+            margin: var(--space-md) 0;
             border-radius: 0 4px 4px 0;
         }
         .objective strong { color: #234e52; }
         code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
-        pre { background: #1a202c; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        pre { background: #1a202c; color: #e2e8f0; padding: var(--space-sm); border-radius: 6px; overflow-x: auto; }
         pre code { background: none; padding: 0; color: inherit; }
         .nav-buttons {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #e2e8f0;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid var(--color-border);
         }
         .nav-buttons a {
             display: inline-flex;
             align-items: center;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem var(--space-md);
             border-radius: 6px;
             text-decoration: none;
             font-weight: 500;
         }
-        .nav-buttons .prev {
-            background: #edf2f7;
-            color: #4a5568;
-        }
+        .nav-buttons .prev { background: #edf2f7; color: #4a5568; }
         .nav-buttons .prev:hover { background: #e2e8f0; }
-        .nav-buttons .next {
-            background: #2b6cb0;
-            color: white;
-        }
-        .nav-buttons .next:hover { background: #2c5282; }
-        .nav-buttons .disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-        ol, ul { padding-left: 1.5rem; }
+        .nav-buttons .next { background: var(--color-primary); color: white; }
+        .nav-buttons .next:hover { background: var(--color-primary-dark); }
+        ol, ul { padding-left: var(--space-md); }
         li { margin-bottom: 0.75rem; }
-        .breadcrumb { margin-bottom: 1rem; }
-        .breadcrumb a { color: #718096; text-decoration: none; font-size: 0.9rem; }
-        .breadcrumb a:hover { color: #2b6cb0; }
+        .breadcrumb { margin-bottom: var(--space-sm); }
+        .breadcrumb a { color: var(--color-text-light); text-decoration: none; font-size: 0.9rem; }
+        .breadcrumb a:hover { color: var(--color-primary); }
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 0.75rem;
+        }
+        .tool-card {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: var(--space-sm);
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            border-radius: 6px;
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+        .tool-card:hover { background: #bee3f8; text-decoration: none; }
+        .tool-card svg { flex-shrink: 0; }
+        .tool-card strong { display: block; }
+        .tool-card small { color: var(--color-text-light); }
+        .callout {
+            border-left: 4px solid var(--color-warning);
+            padding: var(--space-sm);
+            margin: var(--space-md) 0;
+            border-radius: 0 4px 4px 0;
+            background: #fffaf0;
+        }
+        @media (max-width: 600px) {
+            body { padding: var(--space-sm); }
+            .container { padding: var(--space-sm); }
+            .progress-bar .step .label { display: none; }
+            .progress-bar .step .circle { width: 24px; height: 24px; font-size: 0.75rem; }
+            .progress-bar .step::before { top: 12px; }
+            .nav-buttons { flex-direction: column; gap: var(--space-xs); }
+            .nav-buttons a { text-align: center; justify-content: center; }
+        }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="container">
-        <nav class="progress-bar">
-            <div class="step active">
-                <div class="circle">0</div>
+        <nav class="progress-bar" aria-label="Workshop progress">
+            <div class="step active" aria-current="step">
+                <div class="circle" aria-label="Phase 0: Current">0</div>
                 <span class="label">Preflight</span>
             </div>
             <div class="step">
@@ -157,59 +213,61 @@
             </div>
         </nav>
 
-        <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
-        
-        <span class="phase-badge">Phase 0</span>
-        <span class="time-badge">5 min</span>
-        <h1>Preflight Check</h1>
-        
-        <div class="objective">
-            <strong>Objective:</strong> Verify the environment before we start.
-        </div>
-        
-        <p>Before we begin, please ensure you have everything set up correctly:</p>
-        
-        <ol>
-            <li><strong>VS Code is open</strong> - We'll be using VS Code throughout this workshop. <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">Download VS Code &rarr;</a></li>
-            <li><strong>GitHub Copilot extension is installed and signed in</strong> - Check for the Copilot icon in the bottom right corner of VS Code. Click it to verify you're authenticated. <a href="https://docs.github.com/en/copilot/quickstart" target="_blank" rel="noopener noreferrer">Install Copilot &rarr;</a></li>
-            <li><strong>Terminal is open</strong> - Open a terminal in VS Code via <code>Terminal &rarr; New Terminal</code> (or <code>Ctrl+`</code>).</li>
-            <li><strong>Python is recognized</strong> - Type <code>python --version</code> in your terminal. You should see Python 3.10 or higher. <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Download Python &rarr;</a></li>
-            <li><strong>Git is recognized</strong> - Type <code>git --version</code> in your terminal. You should see a version number. <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Download Git &rarr;</a></li>
-        </ol>
-        
-        <div style="background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0;">
-            <strong>Troubleshooting:</strong> If any of these checks fail, raise your hand and we'll help you get set up before we proceed.
-        </div>
-        
-        <h2 style="margin-top: 2rem;">Quick Links</h2>
-        <p>If you're missing any tools, download them here:</p>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
-            <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #ebf8ff; border: 1px solid #90cdf4; border-radius: 6px; color: #2b6cb0; text-decoration: none;">
-                <span style="font-size: 1.5rem;">&#128187;</span>
-                <div><strong>VS Code</strong><br><small style="color: #4a5568;">code.visualstudio.com</small></div>
-            </a>
-            <a href="https://docs.github.com/en/copilot/quickstart" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #ebf8ff; border: 1px solid #90cdf4; border-radius: 6px; color: #2b6cb0; text-decoration: none;">
-                <span style="font-size: 1.5rem;">&#129302;</span>
-                <div><strong>GitHub Copilot</strong><br><small style="color: #4a5568;">docs.github.com</small></div>
-            </a>
-            <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #ebf8ff; border: 1px solid #90cdf4; border-radius: 6px; color: #2b6cb0; text-decoration: none;">
-                <span style="font-size: 1.5rem;">&#128013;</span>
-                <div><strong>Python 3.10+</strong><br><small style="color: #4a5568;">python.org</small></div>
-            </a>
-            <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: #ebf8ff; border: 1px solid #90cdf4; border-radius: 6px; color: #2b6cb0; text-decoration: none;">
-                <span style="font-size: 1.5rem;">&#128056;</span>
-                <div><strong>Git</strong><br><small style="color: #4a5568;">git-scm.com</small></div>
-            </a>
-        </div>
-        
-        <p>Once all checks pass, you're ready to begin the workshop!</p>
+        <main id="main-content">
+            <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
+            
+            <span class="phase-badge">Phase 0</span>
+            <span class="time-badge">5 min</span>
+            <h1>Preflight Check</h1>
+            
+            <div class="objective">
+                <strong>Objective:</strong> Verify the environment before we start.
+            </div>
+            
+            <p>Before we begin, please ensure you have everything set up correctly:</p>
+            
+            <ol>
+                <li><strong>VS Code is open</strong> - We'll be using VS Code throughout this workshop. <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer">Download VS Code &rarr;</a></li>
+                <li><strong>GitHub Copilot extension is installed and signed in</strong> - Check for the Copilot icon in the bottom right corner of VS Code. Click it to verify you're authenticated. <a href="https://docs.github.com/en/copilot/quickstart" target="_blank" rel="noopener noreferrer">Install Copilot &rarr;</a></li>
+                <li><strong>Terminal is open</strong> - Open a terminal in VS Code via <code>Terminal &rarr; New Terminal</code> (or <code>Ctrl+`</code>).</li>
+                <li><strong>Python is recognized</strong> - Type <code>python --version</code> in your terminal. You should see Python 3.10 or higher. <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Download Python &rarr;</a></li>
+                <li><strong>Git is recognized</strong> - Type <code>git --version</code> in your terminal. You should see a version number. <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">Download Git &rarr;</a></li>
+            </ol>
+            
+            <div class="callout">
+                <strong>Troubleshooting:</strong> If any of these checks fail, raise your hand and we'll help you get set up before we proceed.
+            </div>
+            
+            <h2 style="margin-top: var(--space-lg);">Quick Links</h2>
+            <p>If you're missing any tools, download them here:</p>
+            <div class="tool-grid">
+                <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener noreferrer" class="tool-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                    <div><strong>VS Code</strong><br><small>code.visualstudio.com</small></div>
+                </a>
+                <a href="https://docs.github.com/en/copilot/quickstart" target="_blank" rel="noopener noreferrer" class="tool-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"></path><circle cx="12" cy="15" r="1"></circle></svg>
+                    <div><strong>GitHub Copilot</strong><br><small>docs.github.com</small></div>
+                </a>
+                <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer" class="tool-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                    <div><strong>Python 3.10+</strong><br><small>python.org</small></div>
+                </a>
+                <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" class="tool-card">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><path d="M11 18H8a2 2 0 0 1-2-2V9"></path></svg>
+                    <div><strong>Git</strong><br><small>git-scm.com</small></div>
+                </a>
+            </div>
+            
+            <p>Once all checks pass, you're ready to begin the workshop!</p>
+        </main>
 
         <div class="nav-buttons">
             <a href="../index.html" class="prev">&larr; Home</a>
             <a href="phase1.html" class="next">Phase 1: The AI Workflow &rarr;</a>
         </div>
         
-        <footer style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; color: #a0aec0; font-size: 0.8rem; text-align: center;">
+        <footer style="margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 0.8rem; text-align: center;">
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>
         </footer>
     </div>
