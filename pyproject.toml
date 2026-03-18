@@ -5,15 +5,17 @@ description = "Workshop on programming with AI for Applied Research"
 readme = "README.md"
 requires-python = ">=3.10"
 
+[tool.ruff]
+line-length = 88
+
 [tool.ruff.lint]
 select = ["E", "F", "C90", "PLR"]
 
 [tool.ruff.lint.mccabe]
-max-cognitive-complexity = 12  # Workshop: lower to 5 for Phase 3-4 demo
+max-complexity = 12  # Workshop: lower to 5 for Phase 3-4 demo
 
 [tool.ruff.lint.pylint]
 max-statements = 50
 max-args = 6
 
 [tool.ruff.format]
-line-length = 88

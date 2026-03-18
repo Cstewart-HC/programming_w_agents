@@ -241,9 +241,14 @@
                 <pre><code>pre-commit run --all-files</code></pre>
                 
                 <div class="success">
-                    <strong>Success!</strong> Once the hooks pass, stage and commit your code:
-                    <pre><code>git add src/analysis.py
-git commit -m "Add retail data analysis script"</code></pre>
+                    <strong>Success!</strong> Once the hooks pass, use Agent Mode to commit:
+                    <div class="prompt-box">
+                        <div class="prompt-label">
+                            <strong>Copy this prompt:</strong>
+                            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                        </div>
+                        <span class="prompt-text">"Stage and commit <code>src/analysis.py</code> with the message 'Add retail data analysis script'."</span>
+                    </div>
                 </div>
             </div>
             
