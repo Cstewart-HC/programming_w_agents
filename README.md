@@ -1,6 +1,6 @@
 # Programming with AI Workshop
 
-Welcome to the **Programming with AI Workshop** for the Applied Research team.
+Welcome to the **Programming with AI Workshop** for Academic & Applied Research at Holland College.
 
 **Workshop Materials**: [GitHub Pages](https://cstewart-hc.github.io/programming_w_agents/)
 
