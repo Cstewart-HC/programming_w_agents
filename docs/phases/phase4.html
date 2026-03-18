@@ -166,12 +166,12 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "Plan the implementation for a script in <code>src/analysis.py</code> that ingests <code>data/retail_sample.csv</code>. Requirements:
+                    "Plan the implementation for <code>src/analysis.py</code> that ingests <code>data/retail_sample.csv</code>. This is the retail sales analytics script we defined in Phase 1. Requirements:
                     <ol>
-                        <li>Explicitly validate the schema and parse the dates defensively.</li>
-                        <li>Calculate total revenue (Quantity * UnitPrice) per Country.</li>
-                        <li>Flag any returns (negative quantities) or records with missing CustomerIDs as anomalies.</li>
-                        <li>The output must print two clean console tables: a revenue summary by country and an anomaly alert list.</li>
+                        <li><strong>Ingest and validate:</strong> Explicitly validate the schema and parse the dates defensively.</li>
+                        <li><strong>Revenue analysis:</strong> Calculate total revenue (Quantity * UnitPrice) per Country.</li>
+                        <li><strong>Anomaly detection:</strong> Flag any returns (negative quantities) or records with missing CustomerIDs as anomalies.</li>
+                        <li><strong>Console output:</strong> Print two clean console tables: a revenue summary by country and an anomaly alert list.</li>
                     </ol>
                     Outline the necessary typed helper functions with docstrings first."
                 </div>
