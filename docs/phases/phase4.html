@@ -152,7 +152,7 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "Download the <code>retail_sample.csv</code> file from <code>https://github.com/Cstewart-HC/programming_w_agents/blob/master/data/retail_sample.csv</code> and save it directly into my local <code>data/</code> directory."
+                    <span class="prompt-text">"Download the <code>retail_sample.csv</code> file from <code>https://github.com/Cstewart-HC/programming_w_agents/blob/master/data/retail_sample.csv</code> and save it directly into my local <code>data/</code> directory."</span>
                 </div>
             </div>
             
@@ -166,14 +166,14 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "Plan the implementation for <code>src/analysis.py</code> that ingests <code>data/retail_sample.csv</code>. This is the retail sales analytics script we defined in Phase 1. Requirements:
+                    <span class="prompt-text">"Plan the implementation for <code>src/analysis.py</code> that ingests <code>data/retail_sample.csv</code>. This is the retail sales analytics script we defined in Phase 1. Requirements:
                     <ol>
                         <li><strong>Ingest and validate:</strong> Explicitly validate the schema and parse the dates defensively.</li>
                         <li><strong>Revenue analysis:</strong> Calculate total revenue (Quantity * UnitPrice) per Country.</li>
                         <li><strong>Anomaly detection:</strong> Flag any returns (negative quantities) or records with missing CustomerIDs as anomalies.</li>
                         <li><strong>Console output:</strong> Print two clean console tables: a revenue summary by country and an anomaly alert list.</li>
                     </ol>
-                    Outline the necessary typed helper functions with docstrings first."
+                    Outline the necessary typed helper functions with docstrings first."</span>
                 </div>
                 
                 <div class="note">
@@ -190,7 +190,7 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "Implement the plan we just discussed in <code>src/analysis.py</code>. However, do it entirely within a single, highly nested function named <code>process_retail_data</code> ignoring the helper function outline."
+                    <span class="prompt-text">"Implement the plan we just discussed in <code>src/analysis.py</code>. However, do it entirely within a single, highly nested function named <code>process_retail_data</code> ignoring the helper function outline."</span>
                 </div>
                 
                 <div class="warning">
@@ -209,7 +209,7 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "Review this code. Does it adhere to the complexity rules defined in my workspace instructions?"
+                    <span class="prompt-text">"Review this code. Does it adhere to the complexity rules defined in my workspace instructions?"</span>
                 </div>
                 
                 <p><em>Copilot may warn you, but AI is fallible. We need a hard gate.</em></p>
@@ -234,7 +234,7 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "The code failed my pre-commit hook due to high cognitive complexity. Refactor <code>process_retail_data</code> into the smaller, modular helper functions we originally planned so it passes the Ruff linter."
+                    <span class="prompt-text">"The code failed my pre-commit hook due to high cognitive complexity. Refactor <code>process_retail_data</code> into the smaller, modular helper functions we originally planned so it passes the Ruff linter."</span>
                 </div>
                 
                 <p>Accept the refactored code. Run <code>pre-commit run --all-files</code> again to verify it passes:</p>
@@ -267,7 +267,8 @@ git commit -m "Add retail data analysis script"</code></pre>
     </div>
     <script>
         function copyPrompt(btn) {
-            var promptText = btn.closest('.prompt-box').innerText.replace('Copy this prompt:', '').replace('Copied!', '').trim();
+            var content = btn.closest('.prompt-box').querySelector('.prompt-text');
+            var promptText = content.innerText.trim();
             navigator.clipboard.writeText(promptText).then(function() {
                 btn.textContent = 'Copied!';
                 btn.classList.add('copied');

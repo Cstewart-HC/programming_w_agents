@@ -154,7 +154,7 @@
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    "Act as a senior Python data engineer. Execute these steps sequentially:
+                    <span class="prompt-text">"Act as a senior Python data engineer. Execute these steps sequentially:
                     <ol>
                         <li>Create a new directory called <code>retail_analysis</code>, navigate into it, and initialize a git repository.</li>
                         <li>Use <code>pip</code> to install the latest versions of <code>pandas</code>, <code>seaborn</code>, <code>jupyter</code>, <code>ruff</code>, and <code>pre-commit</code>.</li>
@@ -164,7 +164,7 @@
                         <li>Create an empty <code>.github/copilot-instructions.md</code> file.</li>
                         <li>Create <code>pyproject.toml</code> and <code>.pre-commit-config.yaml</code> files configured to use Ruff. <strong>For this demonstration, enforce a strict cognitive complexity limit of 5 (C901) and a maximum line length of 88.</strong> Finally, run <code>pre-commit install</code>.</li>
                     </ol>
-                    Review the suggested steps and click <strong>Run</strong>."
+                    Review the suggested steps and click <strong>Run</strong>."</span>
                 </div>
                 
                 <div class="commit-checkpoint">
@@ -174,7 +174,7 @@
                             <strong>Copy this prompt:</strong>
                             <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                         </div>
-                        "Stage and commit all files with the message 'Initial project scaffolding'."
+                        <span class="prompt-text">"Stage and commit all files with the message 'Initial project scaffolding'."</span>
                     </div>
                     This gives you a clean baseline to return to if anything goes wrong later.
                 </div>
@@ -207,7 +207,7 @@ pre-commit install</code></pre>
                             <strong>Copy this prompt:</strong>
                             <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                         </div>
-                        "Stage and commit the <code>.github/copilot-instructions.md</code> file with the message 'Add copilot instructions'."
+                        <span class="prompt-text">"Stage and commit the <code>.github/copilot-instructions.md</code> file with the message 'Add copilot instructions'."</span>
                     </div>
                     This ensures the AI's guidelines are tracked from the start.
                 </div>
@@ -229,7 +229,8 @@ pre-commit install</code></pre>
     </div>
     <script>
         function copyPrompt(btn) {
-            var promptText = btn.closest('.prompt-box').innerText.replace('Copy this prompt:', '').replace('Copied!', '').trim();
+            var content = btn.closest('.prompt-box').querySelector('.prompt-text');
+            var promptText = content.innerText.trim();
             navigator.clipboard.writeText(promptText).then(function() {
                 btn.textContent = 'Copied!';
                 btn.classList.add('copied');
