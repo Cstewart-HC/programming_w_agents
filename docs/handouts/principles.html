@@ -56,6 +56,30 @@
         ul, ol { padding-left: 1.5rem; }
         li { margin-bottom: 0.5rem; }
         .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+        .copy-all-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .copy-all-bar span { font-size: 0.9rem; color: #2b6cb0; }
+        .copy-all-btn {
+            background: #2b6cb0;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.25rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: background 0.15s;
+        }
+        .copy-all-btn:hover { background: #2c5282; }
+        .copy-all-btn.copied { background: #38a169; }
     </style>
 </head>
 <body>
@@ -67,6 +91,12 @@
         <h1>Handout 1: Applied Analytics Engineering Principles</h1>
         <p><em>Note: Keep a copy of this text inside <code>.github/copilot-instructions.md</code> for the AI to read.</em></p>
         
+        <div class="copy-all-bar">
+            <span>Paste this into <code>.github/copilot-instructions.md</code></span>
+            <button class="copy-all-btn" onclick="copyPrinciples(this)">Copy All</button>
+        </div>
+
+        <div id="principles-content">
         <div class="principle">
             <h3>1. Modularity & Single Responsibility</h3>
             <div class="constraint">Always break down complex requests into smaller, composable helper functions. Do not generate single, monolithic functions.</div>
@@ -156,6 +186,7 @@ def load_retail_data(filepath: Path) -> pd.DataFrame:
     
     return df</code></pre>
         </div>
+        </div>
         
         <p class="nav" style="margin-top: 2rem;"><a href="../index.html">&larr; Back to Overview</a></p>
         </main>
@@ -164,5 +195,19 @@ def load_retail_data(filepath: Path) -> pd.DataFrame:
             <p>This workshop was developed with the assistance of generative AI (GLM-5).</p>
         </footer>
     </div>
+    <script>
+        function copyPrinciples(btn) {
+            var el = document.getElementById('principles-content');
+            var text = el.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = 'Copy All';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
