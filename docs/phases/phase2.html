@@ -135,7 +135,7 @@
             <h1>Deterministic Setup</h1>
             
             <div class="objective">
-                <strong>Objective:</strong> Set up the environment and lock dependencies securely using AI-assisted terminal commands.
+                <strong>Objective:</strong> Set up the environment and lock dependencies securely using Agent Mode.
             </div>
             
             <div class="step-section">
@@ -156,7 +156,7 @@ cd retail_analysis</code></pre>
             
             <div class="step-section">
                 <h3>Step 1: The Master Scaffolding Prompt</h3>
-                <p>Open the <strong>Terminal Chat</strong> (press <code>Ctrl+I</code> or <code>Cmd+I</code> while focused in the terminal). This allows Copilot to execute commands directly.</p>
+                <p>Open the <strong>Copilot Chat Sidebar</strong> (<code>Ctrl+Alt+I</code>) and select <strong>Agent Mode</strong> from the agent selector at the top of the panel. Agent Mode can execute terminal commands and create files simultaneously.</p>
                 
                 <div class="prompt-box">
                     <div class="prompt-label">
@@ -177,7 +177,7 @@ cd retail_analysis</code></pre>
                 </div>
                 
                 <div class="note">
-                    <strong>Fallback:</strong> If Terminal Chat fails due to permissions, run these commands manually:
+                    <strong>Fallback:</strong> If Agent Mode fails due to permissions, run these commands manually:
                     <pre><code>python -m venv .venv
 .venv\Scripts\activate  # Windows
 source .venv/bin/activate  # macOS/Linux

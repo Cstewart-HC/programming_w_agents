@@ -127,7 +127,7 @@
             
             <div class="step">
                 <h3><span class="step-number">1</span>The Master Scaffolding Prompt</h3>
-                <p>Open the <strong>Terminal Chat</strong> (usually <code>Ctrl+I</code> or <code>Cmd+I</code> while focused in the terminal). We will use a specific prompt that forces the agent to resolve the newest package versions from PyPI directly via <code>pip</code>.</p>
+                <p>Open the <strong>Copilot Chat Sidebar</strong> (<code>Ctrl+Alt+I</code>) and select <strong>Agent Mode</strong>. Agent Mode can execute terminal commands and create files simultaneously.</p>
                 
                 <div class="prompt-box">
                     "Act as a senior Python data engineer. Execute these steps sequentially:
@@ -144,7 +144,7 @@
                 </div>
                 
                 <div class="note">
-                    <strong>Fallback:</strong> If Terminal Chat fails due to permissions, you can run these standard commands manually: <code>python -m venv .venv</code>, activate it, <code>pip install pandas ruff pre-commit</code>, <code>pip freeze > requirements.txt</code>, and <code>pre-commit install</code>
+                    <strong>Fallback:</strong> If Agent Mode fails due to permissions, you can run these standard commands manually: <code>python -m venv .venv</code>, activate it, <code>pip install pandas ruff pre-commit</code>, <code>pip freeze > requirements.txt</code>, and <code>pre-commit install</code>
                 </div>
             </div>
             
@@ -188,7 +188,7 @@
             <div class="step">
                 <h3><span class="step-number">1</span>Data Retrieval</h3>
                 <p>Instead of manually downloading files, we will use the agent to fetch the dataset directly from the workshop repository.</p>
-                <p>Open the <strong>Terminal Chat</strong> (<code>Ctrl+I</code>) and prompt:</p>
+                <p>Open <strong>Agent Mode</strong> (<code>Ctrl+Shift+I</code>) and prompt:</p>
                 
                 <div class="prompt-box">
                     "Download the <code>retail_sample.csv</code> file from the raw GitHub URL <code>https://raw.githubusercontent.com/Cstewart-HC/programming_w_agents/main/data/retail_sample.csv</code> and save it directly into my local <code>data/</code> directory."
