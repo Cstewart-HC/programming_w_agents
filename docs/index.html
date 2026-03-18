@@ -18,18 +18,58 @@
         .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         h1 { color: #1a202c; margin-top: 0; }
         h2 { color: #2b6cb0; border-bottom: 2px solid #bee3f8; padding-bottom: 0.5rem; margin-top: 2rem; }
-        h3 { color: #4a5568; }
         a { color: #2b6cb0; text-decoration: none; }
         a:hover { text-decoration: underline; }
-        .phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-        .phase-card {
-            background: #edf2f7;
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #2b6cb0;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .cta:hover { background: #2c5282; text-decoration: none; }
+        .cta .arrow { font-size: 1.25rem; }
+        .phase-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+        .phase-item {
+            display: flex;
+            align-items: center;
             padding: 1rem;
+            background: #f7fafc;
             border-radius: 6px;
             border-left: 4px solid #2b6cb0;
+            transition: all 0.2s;
         }
-        .phase-card h3 { margin: 0 0 0.5rem 0; font-size: 1rem; }
-        .phase-card .duration { color: #718096; font-size: 0.875rem; }
+        .phase-item:hover {
+            background: #edf2f7;
+            transform: translateX(4px);
+        }
+        .phase-item .num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #2b6cb0;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .phase-item .content { flex: 1; }
+        .phase-item .title { font-weight: 600; color: #1a202c; }
+        .phase-item .duration { color: #718096; font-size: 0.875rem; }
+        .phase-item .arrow { color: #a0aec0; margin-left: auto; }
         .handout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
         .handout-card {
             background: #fffaf0;
@@ -38,10 +78,20 @@
             border-left: 4px solid #dd6b20;
         }
         .handout-card h3 { margin: 0 0 0.5rem 0; color: #c05621; font-size: 1rem; }
-        .cta { display: inline-block; background: #2b6cb0; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; margin-top: 1rem; }
-        .cta:hover { background: #2c5282; text-decoration: none; }
         code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
         .note { background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1rem 0; border-radius: 0 4px 4px 0; }
+        .resources-list { background: #f7fafc; padding: 1rem 1.5rem; border-radius: 6px; }
+        .resources-list ul { margin: 0; padding-left: 1.5rem; }
+        .resources-list li { margin-bottom: 0.5rem; }
+        .total-time {
+            display: inline-block;
+            background: #e6fffa;
+            color: #234e52;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -50,38 +100,57 @@
         <p><strong>Audience:</strong> Applied Business Analytics Research Team<br>
         <strong>Environment:</strong> VS Code, GitHub Copilot, Python 3.10+, Git</p>
         
+        <span class="total-time">Total Duration: ~90 minutes</span>
+        
         <h2>Workshop Overview</h2>
         <p>This hands-on workshop teaches you how to effectively use AI assistants (like GitHub Copilot) in your development workflow while maintaining code quality through automated enforcement.</p>
         
-        <a href="workshop.html" class="cta">Start Workshop</a>
+        <a href="phases/phase0.html" class="cta">
+            Start Workshop <span class="arrow">&rarr;</span>
+        </a>
         
         <h2>Workshop Phases</h2>
-        <div class="phase-grid">
-            <div class="phase-card">
-                <h3>Phase 0: Preflight Check</h3>
-                <p class="duration">5 min</p>
-                <p>Verify your environment is ready.</p>
-            </div>
-            <div class="phase-card">
-                <h3>Phase 1: The AI Workflow</h3>
-                <p class="duration">10 min</p>
-                <p>Plan-Build-Review loop and agentic workflows.</p>
-            </div>
-            <div class="phase-card">
-                <h3>Phase 2: Deterministic Setup</h3>
-                <p class="duration">20 min</p>
-                <p>Environment setup with locked dependencies.</p>
-            </div>
-            <div class="phase-card">
-                <h3>Phase 3: Reviewing Enforcement</h3>
-                <p class="duration">10 min</p>
-                <p>Inspect local enforcement mechanisms.</p>
-            </div>
-            <div class="phase-card">
-                <h3>Phase 4: Feature Development</h3>
-                <p class="duration">45 min</p>
-                <p>Execute the core development loop.</p>
-            </div>
+        <div class="phase-timeline">
+            <a href="phases/phase0.html" class="phase-item">
+                <span class="num">0</span>
+                <div class="content">
+                    <div class="title">Preflight Check</div>
+                    <div class="duration">5 min - Verify your environment</div>
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
+            <a href="phases/phase1.html" class="phase-item">
+                <span class="num">1</span>
+                <div class="content">
+                    <div class="title">The AI Workflow</div>
+                    <div class="duration">10 min - Plan-Build-Review loop</div>
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
+            <a href="phases/phase2.html" class="phase-item">
+                <span class="num">2</span>
+                <div class="content">
+                    <div class="title">Deterministic Setup</div>
+                    <div class="duration">20 min - Environment and dependencies</div>
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
+            <a href="phases/phase3.html" class="phase-item">
+                <span class="num">3</span>
+                <div class="content">
+                    <div class="title">Reviewing Enforcement</div>
+                    <div class="duration">10 min - Inspect linting and hooks</div>
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
+            <a href="phases/phase4.html" class="phase-item">
+                <span class="num">4</span>
+                <div class="content">
+                    <div class="title">Feature Development</div>
+                    <div class="duration">45 min - Build, fail, refactor</div>
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
         </div>
         
         <h2>Handouts</h2>
@@ -101,11 +170,14 @@
         </div>
         
         <h2>Resources</h2>
-        <ul>
-            <li><a href="https://github.com/Cstewart-HC/programming_w_agents">GitHub Repository</a></li>
-            <li><strong>Sample Data:</strong> <code>data/retail_sample.csv</code> (December 2010 transactions)</li>
-            <li><strong>Full Dataset:</strong> <code>data/online_retail.xlsx</code></li>
-        </ul>
+        <div class="resources-list">
+            <ul>
+                <li><a href="https://github.com/Cstewart-HC/programming_w_agents">GitHub Repository</a></li>
+                <li><strong>Sample Data:</strong> <code>data/retail_sample.csv</code> (December 2010 transactions, 42K+ rows)</li>
+                <li><strong>Full Dataset:</strong> <code>data/online_retail.xlsx</code></li>
+                <li><a href="workshop.html">View Full Workshop (Single Page)</a></li>
+            </ul>
+        </div>
         
         <div class="note">
             <strong>Note:</strong> The sample dataset contains 42,481 retail transactions from December 2010, sourced from the <a href="https://archive.ics.uci.edu/dataset/352/online+retail">UCI Online Retail dataset</a>.

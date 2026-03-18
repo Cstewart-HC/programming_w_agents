@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 3: Reviewing Enforcement - Programming with AI Workshop</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; color: #2d3748; background: #f7fafc; }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; margin-top: 0; }
+        h2 { color: #2b6cb0; margin-top: 2rem; }
+        .progress-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 0 1rem; }
+        .progress-bar .step { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+        .progress-bar .step::before { content: ''; position: absolute; top: 16px; left: 50%; right: -50%; height: 2px; background: #e2e8f0; z-index: 0; }
+        .progress-bar .step:last-child::before { display: none; }
+        .progress-bar .step.active::before, .progress-bar .step.completed::before { background: #38a169; }
+        .progress-bar .step .circle { width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: bold; color: #718096; z-index: 1; position: relative; }
+        .progress-bar .step.active .circle { background: #2b6cb0; color: white; }
+        .progress-bar .step.completed .circle { background: #38a169; color: white; }
+        .progress-bar .step .label { font-size: 0.75rem; margin-top: 0.5rem; color: #718096; text-align: center; }
+        .progress-bar .step.active .label { color: #2b6cb0; font-weight: 600; }
+        .progress-bar .step.completed .label { color: #38a169; }
+        .phase-badge { display: inline-block; background: #2b6cb0; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .time-badge { display: inline-block; background: #e2e8f0; color: #4a5568; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-left: 0.5rem; }
+        .objective { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 1rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+        .objective strong { color: #234e52; }
+        code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        pre { background: #1a202c; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.9rem; }
+        pre code { background: none; padding: 0; color: inherit; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+        .nav-buttons a { display: inline-flex; align-items: center; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500; }
+        .nav-buttons .prev { background: #edf2f7; color: #4a5568; }
+        .nav-buttons .prev:hover { background: #e2e8f0; }
+        .nav-buttons .next { background: #2b6cb0; color: white; }
+        .nav-buttons .next:hover { background: #2c5282; }
+        .warning { background: #fff5f5; border-left: 4px solid #e53e3e; padding: 1rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+        .warning strong { color: #742a2a; }
+        .config-preview { background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 1rem; margin: 1rem 0; }
+        .config-preview h4 { margin-top: 0; color: #4a5568; }
+        .breadcrumb { margin-bottom: 1rem; }
+        .breadcrumb a { color: #718096; text-decoration: none; font-size: 0.9rem; }
+        .breadcrumb a:hover { color: #2b6cb0; }
+        ul { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="progress-bar">
+            <div class="step completed"><div class="circle">&#10003;</div><span class="label">Preflight</span></div>
+            <div class="step completed"><div class="circle">&#10003;</div><span class="label">AI Workflow</span></div>
+            <div class="step completed"><div class="circle">&#10003;</div><span class="label">Setup</span></div>
+            <div class="step active"><div class="circle">3</div><span class="label">Enforcement</span></div>
+            <div class="step"><div class="circle">4</div><span class="label">Development</span></div>
+        </nav>
+
+        <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
+        
+        <span class="phase-badge">Phase 3</span>
+        <span class="time-badge">10 min</span>
+        <h1>Reviewing Enforcement Mechanisms</h1>
+        
+        <div class="objective">
+            <strong>Objective:</strong> Inspect and understand the local enforcement mechanisms that will catch code quality issues.
+        </div>
+        
+        <h2>Verify Your Configuration</h2>
+        <p>Open <code>pyproject.toml</code> in your editor. You should see something like this:</p>
+        
+        <div class="config-preview">
+            <h4>pyproject.toml</h4>
+            <pre><code>[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "C90"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5</code></pre>
+        </div>
+        
+        <div class="warning">
+            <strong>Critical Callout:</strong> Notice the <code>max-complexity = 5</code> rule. We are overriding the industry standard of 15 down to 5 <em>strictly for this workshop</em> so we can force a failure in the next phase.
+            <br><br>
+            <strong>Do not use 5 in your real projects!</strong> Use 15 (or the value your team agrees on).
+        </div>
+        
+        <h2>What These Rules Mean</h2>
+        <ul>
+            <li><code>select = ["E", "W", "F", "C90"]</code> - Enables pycodestyle errors/warnings, Pyflakes, and McCabe complexity checks</li>
+            <li><code>max-complexity = 5</code> - No function can have cognitive complexity above 5 (workshop only)</li>
+            <li><code>line-length = 88</code> - Maximum line width (Black's default)</li>
+        </ul>
+        
+        <h2>Pre-Commit Hooks</h2>
+        <p>Open <code>.pre-commit-config.yaml</code>. This file defines hooks that run before every commit:</p>
+        
+        <div class="config-preview">
+            <h4>.pre-commit-config.yaml</h4>
+            <pre><code>repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.5
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format</code></pre>
+        </div>
+        
+        <p>When you run <code>git commit</code>, these hooks will:</p>
+        <ul>
+            <li>Run <code>ruff</code> to check for linting errors and auto-fix what it can</li>
+            <li>Run <code>ruff-format</code> to ensure consistent formatting</li>
+            <li><strong>Block the commit</strong> if any errors remain</li>
+        </ul>
+        
+        <div class="warning">
+            <strong>If the agent hallucinated the config files:</strong> Replace their contents with the exact code blocks from <a href="../handouts/fallback-configs.html">Handout 3: Fallback Configurations</a>.
+        </div>
+
+        <div class="nav-buttons">
+            <a href="phase2.html" class="prev">&larr; Phase 2: Setup</a>
+            <a href="phase4.html" class="next">Phase 4: Feature Development &rarr;</a>
+        </div>
+    </div>
+</body>
+</html>

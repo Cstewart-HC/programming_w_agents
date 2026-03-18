@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 1: The AI Workflow - Programming with AI Workshop</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f7fafc;
+        }
+        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; margin-top: 0; }
+        h2 { color: #2b6cb0; margin-top: 2rem; }
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        .progress-bar .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .progress-bar .step::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            right: -50%;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+        .progress-bar .step:last-child::before { display: none; }
+        .progress-bar .step.active::before,
+        .progress-bar .step.completed::before { background: #38a169; }
+        .progress-bar .step .circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: bold;
+            color: #718096;
+            z-index: 1;
+            position: relative;
+        }
+        .progress-bar .step.active .circle { background: #2b6cb0; color: white; }
+        .progress-bar .step.completed .circle { background: #38a169; color: white; }
+        .progress-bar .step .label {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            color: #718096;
+            text-align: center;
+        }
+        .progress-bar .step.active .label { color: #2b6cb0; font-weight: 600; }
+        .progress-bar .step.completed .label { color: #38a169; }
+        .phase-badge { display: inline-block; background: #2b6cb0; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-bottom: 0.5rem; }
+        .time-badge { display: inline-block; background: #e2e8f0; color: #4a5568; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.875rem; margin-left: 0.5rem; }
+        .objective { background: #e6fffa; border-left: 4px solid #38b2ac; padding: 1rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0; }
+        .objective strong { color: #234e52; }
+        code { background: #edf2f7; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+        pre { background: #1a202c; color: #e2e8f0; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+        pre code { background: none; padding: 0; color: inherit; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+        .nav-buttons a { display: inline-flex; align-items: center; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 500; }
+        .nav-buttons .prev { background: #edf2f7; color: #4a5568; }
+        .nav-buttons .prev:hover { background: #e2e8f0; }
+        .nav-buttons .next { background: #2b6cb0; color: white; }
+        .nav-buttons .next:hover { background: #2c5282; }
+        .loop-diagram { background: #ebf8ff; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; }
+        .loop-diagram .step { display: inline-block; background: white; padding: 1rem 1.5rem; border-radius: 6px; margin: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .loop-diagram .arrow { color: #2b6cb0; font-size: 1.5rem; margin: 0 0.25rem; }
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+        .comparison .card { padding: 1rem; border-radius: 6px; }
+        .comparison .old { background: #fff5f5; border: 1px solid #feb2b2; }
+        .comparison .new { background: #f0fff4; border: 1px solid #9ae6b4; }
+        .comparison h3 { margin-top: 0; }
+        .comparison .old h3 { color: #c53030; }
+        .comparison .new h3 { color: #276749; }
+        .breadcrumb { margin-bottom: 1rem; }
+        .breadcrumb a { color: #718096; text-decoration: none; font-size: 0.9rem; }
+        .breadcrumb a:hover { color: #2b6cb0; }
+        ul { padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="progress-bar">
+            <div class="step completed">
+                <div class="circle">&#10003;</div>
+                <span class="label">Preflight</span>
+            </div>
+            <div class="step active">
+                <div class="circle">1</div>
+                <span class="label">AI Workflow</span>
+            </div>
+            <div class="step">
+                <div class="circle">2</div>
+                <span class="label">Setup</span>
+            </div>
+            <div class="step">
+                <div class="circle">3</div>
+                <span class="label">Enforcement</span>
+            </div>
+            <div class="step">
+                <div class="circle">4</div>
+                <span class="label">Development</span>
+            </div>
+        </nav>
+
+        <p class="breadcrumb"><a href="../index.html">&larr; Workshop Home</a></p>
+        
+        <span class="phase-badge">Phase 1</span>
+        <span class="time-badge">10 min</span>
+        <h1>The AI Workflow</h1>
+        
+        <div class="objective">
+            <strong>Objective:</strong> Move from "autocomplete" to an agentic workflow using the Plan-Build-Review loop.
+        </div>
+        
+        <h2>Autocomplete vs. Agents</h2>
+        <p>Traditional autocomplete suggests the next few characters. Agentic AI understands context, reasons about your intent, and can execute multi-step tasks.</p>
+        
+        <div class="comparison">
+            <div class="card old">
+                <h3>Old Way: Autocomplete</h3>
+                <ul>
+                    <li>Suggests next line of code</li>
+                    <li>No understanding of project context</li>
+                    <li>You drive every decision</li>
+                    <li>Reactive, not proactive</li>
+                </ul>
+            </div>
+            <div class="card new">
+                <h3>New Way: Agentic Workflow</h3>
+                <ul>
+                    <li>Understands entire codebase</li>
+                    <li>Plans before implementing</li>
+                    <li>Executes multi-file changes</li>
+                    <li>Iterates based on feedback</li>
+                </ul>
+            </div>
+        </div>
+        
+        <h2>The Core Loop: Plan-Build-Review</h2>
+        <p>This is the rhythm you'll use throughout the workshop and in your daily work:</p>
+        
+        <div class="loop-diagram">
+            <div class="step"><strong>Plan</strong><br><small>Design in Chat</small></div>
+            <span class="arrow">&rarr;</span>
+            <div class="step"><strong>Build</strong><br><small>Implement with Edits</small></div>
+            <span class="arrow">&rarr;</span>
+            <div class="step"><strong>Review</strong><br><small>AI + Hooks verify</small></div>
+            <span class="arrow">&rarr;</span>
+            <span class="arrow" style="margin-left: -1rem;">&#8635;</span>
+        </div>
+        
+        <h3>1. Plan</h3>
+        <p>Before writing any code, use the <strong>Copilot Chat Sidebar</strong> to design your approach:</p>
+        <ul>
+            <li>Describe what you want to build</li>
+            <li>Ask for an outline of functions/modules needed</li>
+            <li>Clarify edge cases and requirements</li>
+        </ul>
+        
+        <h3>2. Build</h3>
+        <p>Use <strong>Copilot Edits (Agent Mode)</strong> to implement across multiple files:</p>
+        <ul>
+            <li>Reference your plan in the prompt</li>
+            <li>Let the agent scaffold the structure</li>
+            <li>Review and accept changes file by file</li>
+        </ul>
+        
+        <h3>3. Review</h3>
+        <p>Combine <strong>soft AI checks</strong> with <strong>hard Git hooks</strong>:</p>
+        <ul>
+            <li>Use <code>/review</code> in Chat for AI feedback</li>
+            <li>Run <code>pre-commit</code> for enforcement</li>
+            <li>If hooks fail, feed the error back to the agent and iterate</li>
+        </ul>
+        
+        <div style="background: #fffaf0; border-left: 4px solid #dd6b20; padding: 1rem; margin: 1.5rem 0; border-radius: 0 4px 4px 0;">
+            <strong>Key Insight:</strong> The AI is your pair programmer, but your Git hooks are the code reviewer that never sleeps. Trust the hooks over the AI's assurances.
+        </div>
+
+        <div class="nav-buttons">
+            <a href="phase0.html" class="prev">&larr; Phase 0: Preflight</a>
+            <a href="phase2.html" class="next">Phase 2: Deterministic Setup &rarr;</a>
+        </div>
+    </div>
+</body>
+</html>
