@@ -169,17 +169,17 @@
                     <g>
                         <rect x="95" y="30" width="130" height="70" rx="12" fill="#ebf8ff" stroke="#2b6cb0" stroke-width="2"/>
                         <text x="160" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#2b6cb0">Plan</text>
-                        <text x="160" y="82" text-anchor="middle" font-size="12" fill="#4a5568">Copilot Chat</text>
+                        <text x="160" y="82" text-anchor="middle" font-size="12" fill="#4a5568">Plan Agent</text>
                     </g>
                     <g>
                         <rect x="275" y="30" width="130" height="70" rx="12" fill="#f0fff4" stroke="#38a169" stroke-width="2"/>
                         <text x="340" y="60" text-anchor="middle" font-size="18" font-weight="bold" fill="#38a169">Build</text>
-                        <text x="340" y="82" text-anchor="middle" font-size="12" fill="#4a5568">Copilot Edits</text>
+                        <text x="340" y="82" text-anchor="middle" font-size="12" fill="#4a5568">Agent Mode</text>
                     </g>
                     <g>
                         <rect x="185" y="190" width="130" height="70" rx="12" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
                         <text x="250" y="220" text-anchor="middle" font-size="18" font-weight="bold" fill="#c05621">Review</text>
-                        <text x="250" y="242" text-anchor="middle" font-size="12" fill="#4a5568">AI + Git Hooks</text>
+                        <text x="250" y="242" text-anchor="middle" font-size="12" fill="#4a5568">Ask Agent + Hooks</text>
                     </g>
                     <text x="272" y="108" text-anchor="middle" font-size="11" fill="#718096" font-style="italic">approve plan</text>
                     <text x="228" y="195" text-anchor="middle" font-size="11" fill="#718096" font-style="italic">run hooks</text>
@@ -187,26 +187,26 @@
                 </svg>
             </div>
             
-            <h3>1. Plan</h3>
-            <p>Before writing any code, use the <strong>Copilot Chat Sidebar</strong> to design your approach:</p>
+            <h3>1. Plan (Plan Agent)</h3>
+            <p>Use the <strong>Plan Agent</strong> to design your approach before writing any code:</p>
             <ul>
                 <li>Describe what you want to build</li>
                 <li>Ask for an outline of functions/modules needed</li>
                 <li>Clarify edge cases and requirements</li>
             </ul>
             
-            <h3>2. Build</h3>
-            <p>Use <strong>Copilot Edits (Agent Mode)</strong> to implement across multiple files:</p>
+            <h3>2. Build (Agent Mode)</h3>
+            <p>Use <strong>Agent Mode</strong> to implement across multiple files:</p>
             <ul>
                 <li>Reference your plan in the prompt</li>
                 <li>Let the agent scaffold the structure</li>
                 <li>Review and accept changes file by file</li>
             </ul>
             
-            <h3>3. Review</h3>
-            <p>Combine <strong>soft AI checks</strong> with <strong>hard Git hooks</strong>:</p>
+            <h3>3. Review (Ask Agent + Git Hooks)</h3>
+            <p>Combine <strong>Ask Agent</strong> soft checks with <strong>hard Git hooks</strong>:</p>
             <ul>
-                <li>Use <code>/review</code> in Chat for AI feedback</li>
+                <li>Use the <strong>Ask Agent</strong> for AI feedback on your code</li>
                 <li>Run <code>pre-commit</code> for enforcement</li>
                 <li>If hooks fail, feed the error back to the agent and iterate</li>
             </ul>
