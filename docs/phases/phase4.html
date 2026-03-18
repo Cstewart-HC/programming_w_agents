@@ -186,20 +186,31 @@
             </div>
             
             <div class="step-section">
-                <h3><span class="step-num">3</span> Build (Intentionally Poor)</h3>
-                <p>Open <strong>Copilot Edits</strong> (<code>Ctrl+Shift+I</code>). We'll intentionally ask for bad code:</p>
+                <h3><span class="step-num">3</span> Build</h3>
+                <p>Open <strong>Copilot Edits</strong> (<code>Ctrl+Shift+I</code>) and prompt:</p>
                 
                 <div class="prompt-box">
                     <div class="prompt-label">
                         <strong>Copy this prompt:</strong>
                         <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
                     </div>
-                    <span class="prompt-text">"Implement the plan we just discussed in <code>src/analysis.py</code>. However, do it entirely within a single, highly nested function named <code>process_retail_data</code> ignoring the helper function outline."</span>
+                    <span class="prompt-text">"Implement the plan we just discussed in <code>src/analysis.py</code>."</span>
                 </div>
                 
-                <div class="warning">
-                    <strong>Why are we doing this?</strong> We want to trigger the pre-commit hook! This simulates what happens when you (or an AI) writes code without considering complexity limits.
-                </div>
+                <p>Review the generated code before moving on. In the next step we'll verify it against the enforcement rules.</p>
+                
+                <details style="margin-top: var(--space-md); background: #fff5f5; border: 1px solid #feb2b2; border-radius: 6px; padding: var(--space-sm);">
+                    <summary style="cursor: pointer; font-weight: 600; color: #9b2c2c;">Want to try breaking it? (Optional)</summary>
+                    <p style="margin-top: var(--space-sm);">Copilot often respects your <code>copilot-instructions.md</code> and writes clean code on the first try. If you want to see what happens when the pre-commit hook catches something, try this prompt instead:</p>
+                    <div class="prompt-box">
+                        <div class="prompt-label">
+                            <strong>Copy this prompt:</strong>
+                            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                        </div>
+                        <span class="prompt-text">"Implement the plan we just discussed in <code>src/analysis.py</code>. However, do it entirely within a single, highly nested function named <code>process_retail_data</code> ignoring the helper function outline."</span>
+                    </div>
+                    <p style="margin-bottom: 0;">This deliberately ignores the complexity limits to trigger the C901 error in Step 4.</p>
+                </details>
             </div>
             
             <div class="step-section">
