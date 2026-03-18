@@ -225,6 +225,36 @@ France               £12,518.73       834
             <div class="success" style="margin-top: var(--space-lg);">
                 <strong>Workshop Complete.</strong> You went from an empty folder to a working, linted, committed analysis script — all driven through AI-assisted prompts with automated quality gates. The code isn't just correct; it's structured well enough that a teammate (or you, six months from now) can read and modify it.
             </div>
+
+            <h2>What's Missing?</h2>
+            <p>The Plan-Build-Review loop you learned today is a powerful starting point, but a real data pipeline needs more to be trustworthy:</p>
+            <ul>
+                <li><strong>Unit tests</strong> — How do you know your revenue calculation is correct for edge cases (zero quantities, missing prices, negative returns)?</li>
+                <li><strong>Data validation</strong> — What if the CSV schema changes or a column goes missing? A validation pass would catch that before any analysis runs.</li>
+                <li><strong>Reproducibility</strong> — Are your results the same every run? Without pinned dependencies and deterministic data handling, they might not be.</li>
+                <li><strong>CI/CD</strong> — Right now the hooks run on your machine. In a team setting, they should run automatically on every pull request.</li>
+            </ul>
+
+            <h2>Next Workshop</h2>
+            <p>A follow-up session will extend this project with automated testing and data validation, using the same Plan-Build-Review loop with Copilot. You'll learn how to prompt for testable code from the start and use hooks to enforce test coverage, not just style.</p>
+
+            <h2>Take-Home Challenge</h2>
+            <p>Extend this project by adding a Jupyter notebook that acts as a <strong>dashboard</strong> for the analysis results. The notebook should:</p>
+            <ul>
+                <li>Read the report from <code>reports/analysis_report.txt</code> (or the CSV directly)</li>
+                <li>Display the revenue-by-country data as a <strong>bar chart</strong></li>
+                <li>Display anomaly counts as a <strong>pie chart or summary table</strong></li>
+                <li>Include markdown cells explaining each section</li>
+            </ul>
+            <p>Save it as <code>notebooks/dashboard.ipynb</code> and use the same Plan-Build-Review loop to build it.</p>
+            
+            <div class="prompt-box">
+                <div class="prompt-label">
+                    <strong>Copy this prompt:</strong>
+                    <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                </div>
+                <span class="prompt-text">"Create a Jupyter notebook at <code>notebooks/dashboard.ipynb</code> that reads <code>data/retail_sample.csv</code>, displays a revenue-by-country bar chart and an anomaly summary, with markdown cells explaining each section."</span>
+            </div>
         </main>
 
         <div class="nav-buttons">
