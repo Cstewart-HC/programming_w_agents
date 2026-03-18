@@ -168,9 +168,14 @@
                 </div>
                 
                 <div class="commit-checkpoint">
-                    <strong>Checkpoint:</strong> Once scaffolding is complete, make your initial commit:
-                    <pre><code>git add -A
-git commit -m "Initial project scaffolding"</code></pre>
+                    <strong>Checkpoint:</strong> Once scaffolding is complete, ask Agent Mode to make your initial commit:
+                    <div class="prompt-box">
+                        <div class="prompt-label">
+                            <strong>Copy this prompt:</strong>
+                            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                        </div>
+                        "Stage and commit all files with the message 'Initial project scaffolding'."
+                    </div>
                     This gives you a clean baseline to return to if anything goes wrong later.
                 </div>
                 
@@ -196,9 +201,14 @@ pre-commit install</code></pre>
                 <p>Refer to <a href="../handouts/principles.html">Handout 1: Applied Analytics Engineering Principles</a> for the full content.</p>
                 
                 <div class="commit-checkpoint">
-                    <strong>Checkpoint:</strong> After pasting the principles, commit the workspace rules:
-                    <pre><code>git add .github/copilot-instructions.md
-git commit -m "Add copilot instructions"</code></pre>
+                    <strong>Checkpoint:</strong> After pasting the principles, ask Agent Mode to commit:
+                    <div class="prompt-box">
+                        <div class="prompt-label">
+                            <strong>Copy this prompt:</strong>
+                            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+                        </div>
+                        "Stage and commit the <code>.github/copilot-instructions.md</code> file with the message 'Add copilot instructions'."
+                    </div>
                     This ensures the AI's guidelines are tracked from the start.
                 </div>
             </div>
